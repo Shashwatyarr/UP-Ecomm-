@@ -1,0 +1,48 @@
+import 'package:ecomm/utils/constants/sizes.dart';
+import 'package:flutter/material.dart';
+
+import '../../../../../common/custom_shapes/circular_container.dart';
+import '../../../../../common/custom_shapes/clipper/rounded_edges_container.dart';
+import '../../../../../utils/constants/colors.dart';
+import '../../../../../utils/helpers/device_helpers.dart';
+
+class UPrimaryHeaderContainer extends StatelessWidget {
+  const UPrimaryHeaderContainer({
+    super.key, required this.child,
+  });
+  final Widget child;
+  @override
+  Widget build(BuildContext context) {
+    return URoundedEdges(
+      child: Container(
+        height: USizes.homePrimaryHeaderHeight,
+        color: UColors.primary,
+        child: Stack(
+          children: [
+            Positioned(
+              top: -150,
+              right: -160,
+              child: UCircularContainer(
+                height: USizes.homePrimaryHeaderHeight,
+                width: USizes.homePrimaryHeaderHeight,
+                backgroundColor: UColors.white.withValues(alpha: 0.1),
+              ),
+            ),
+            Positioned(
+              top: -50,
+              right: -250,
+              child: UCircularContainer(
+                height: USizes.homePrimaryHeaderHeight,
+                width: USizes.homePrimaryHeaderHeight,
+                backgroundColor: UColors.white.withValues(alpha: 0.1),
+              ),
+            ),
+            child,
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+

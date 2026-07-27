@@ -1,7 +1,6 @@
 import 'package:ecomm/utils/helpers/device_helpers.dart';
 import 'package:flutter/material.dart';
 
-import '../../../utils/constants/sizes.dart';
 
 class UElevatedButton extends StatelessWidget {
   const UElevatedButton({

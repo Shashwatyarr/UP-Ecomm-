@@ -2,7 +2,6 @@ import 'package:ecomm/features/authentication/screens/onboarding/widget/onboardi
 import 'package:ecomm/utils/constants/texts.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:lottie/lottie.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 import '../../../../common/widgets/button/elevated_button.dart';
