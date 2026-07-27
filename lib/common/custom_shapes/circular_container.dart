@@ -4,9 +4,9 @@ import '../../utils/constants/colors.dart';
 
 class UCircularContainer extends StatelessWidget {
   const UCircularContainer({
-    super.key, this.height=400,  this.width=400,  this.radius=400,  this.backgroundColor=UColors.white,  this.padding,  this.margin,  this.child,
+    super.key, this.height=400,  this.width=400,  this.backgroundColor=UColors.white,  this.padding,  this.margin,  this.child,
   });
-  final double height,width,radius;
+  final double height,width;
   final Color backgroundColor;
   final EdgeInsetsGeometry? padding,margin;
   final Widget? child;
@@ -18,7 +18,7 @@ class UCircularContainer extends StatelessWidget {
       margin: margin,
       padding: padding,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(radius),
+        borderRadius: BorderRadius.circular(100000000000),
         color: backgroundColor,
       ),
       child: child,

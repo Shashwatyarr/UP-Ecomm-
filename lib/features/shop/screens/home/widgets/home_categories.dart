@@ -1,7 +1,5 @@
 import 'package:ecomm/utils/constants/images.dart';
 import 'package:flutter/material.dart';
-
-import '../../../../../common/custom_shapes/circular_container.dart';
 import '../../../../../common/widgets/image_text/vertical_image_text.dart';
 import '../../../../../utils/constants/colors.dart';
 import '../../../../../utils/constants/sizes.dart';

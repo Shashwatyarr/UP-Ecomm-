@@ -1,5 +1,4 @@
 import 'package:ecomm/common/styles/shadows.dart';
-import 'package:ecomm/utils/helpers/device_helpers.dart';
 import 'package:ecomm/utils/helpers/helper_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
