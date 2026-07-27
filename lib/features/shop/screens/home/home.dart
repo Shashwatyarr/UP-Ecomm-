@@ -1,13 +1,14 @@
-import 'package:ecomm/common/custom_shapes/circular_container.dart';
+
+import 'package:ecomm/features/shop/controllers/home/home_controller.dart';
+import 'package:ecomm/features/shop/screens/home/widgets/Promo_slider.dart';
 import 'package:ecomm/features/shop/screens/home/widgets/home_appbar.dart';
 import 'package:ecomm/features/shop/screens/home/widgets/home_categories.dart';
 import 'package:ecomm/features/shop/screens/home/widgets/primary_header_container.dart';
-import 'package:ecomm/utils/constants/colors.dart';
+import 'package:ecomm/utils/constants/images.dart';
 import 'package:ecomm/utils/constants/sizes.dart';
-import 'package:ecomm/utils/constants/texts.dart';
 import 'package:flutter/material.dart';
-import 'package:iconsax/iconsax.dart';
-
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import '../../../../common/widgets/textfields/search_bar.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -15,26 +16,46 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller= Get.put(HomeController());
     return Scaffold(
-      body: Stack(
+      body: Column(
         children: [
-          SizedBox(height: USizes.homePrimaryHeaderHeight + 10),
-          UPrimaryHeaderContainer(
-            child: Container(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  UHomeAppBar(),
-                  SizedBox(height: USizes.spaceBtwSections),
-                  UHomeCategories(),
-                ],
+          Stack(
+            children: [
+              SizedBox(height: USizes.homePrimaryHeaderHeight + 10),
+              UPrimaryHeaderContainer(
+                child: Container(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      UHomeAppBar(),
+                      SizedBox(height: USizes.spaceBtwSections),
+                      UHomeCategories(),
+                    ],
+                  ),
+                ),
               ),
+              USearchBar(),
+            ],
+          ),
+          SizedBox(height: USizes.defaultSpace),
+          Padding(
+            padding: const EdgeInsets.all(USizes.defaultSpace),
+            child: UPromoSlider(
+              banners: [
+                UImages.homeBanner1,
+                UImages.homeBanner2,
+                UImages.homeBanner3,
+                UImages.homeBanner4,
+                UImages.homeBanner5,
+              ],
             ),
           ),
-          USearchBar(),
         ],
       ),
     );
   }
 }
+
+
 
