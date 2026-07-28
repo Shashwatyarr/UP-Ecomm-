@@ -22,7 +22,7 @@ class StoreScreen extends StatelessWidget {
             return [
               SliverAppBar(
                 automaticallyImplyLeading: false,
-                expandedHeight: 320,
+                expandedHeight: 340,
                 pinned: true,
                 floating: false,
                 flexibleSpace: SingleChildScrollView(
@@ -42,7 +42,7 @@ class StoreScreen extends StatelessWidget {
                                 itemCount: 10,
                                 scrollDirection: Axis.horizontal,
                                 shrinkWrap: true,
-                                itemBuilder: (context, index) => UBrandCard(),
+                                itemBuilder: (context, index) => SizedBox(width: USizes.brandCardWidth,child: UBrandCard()),
                               ),
                             ),
                           ],

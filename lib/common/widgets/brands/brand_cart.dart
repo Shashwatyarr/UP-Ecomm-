@@ -16,7 +16,6 @@ class UBrandCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return URoundedContainer(
-      width: USizes.brandCardWidth,
       height: USizes.brandCardHeight,
       showBorder: showBorder,
       padding: EdgeInsets.all(USizes.sm),

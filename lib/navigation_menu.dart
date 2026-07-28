@@ -1,5 +1,6 @@
 import 'package:ecomm/features/shop/screens/home/home.dart';
 import 'package:ecomm/features/shop/screens/store/store.dart';
+import 'package:ecomm/features/shop/screens/wishlist/wishlist.dart';
 import 'package:ecomm/utils/constants/colors.dart';
 import 'package:ecomm/utils/helpers/helper_functions.dart';
 import 'package:flutter/material.dart';
@@ -39,11 +40,11 @@ class NavigationMenu extends StatelessWidget {
 
 class NavigationController extends GetxController {
   RxInt selectedIndex = 0.obs;
-
+  static NavigationController get instance => Get.find();
   List<Widget> screen= [
     HomeScreen(),
     StoreScreen(),
-    Container(color: Colors.red,),
+    WishlistScreen(),
     Container(color: Colors.blue,),
   ];
 }

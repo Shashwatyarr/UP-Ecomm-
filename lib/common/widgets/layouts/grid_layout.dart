@@ -6,12 +6,12 @@ class UGridLayout extends StatelessWidget {
   const UGridLayout({
     super.key,
     required this.itemCount,
-    this.mainAxisCount=288,
+    this.mainAxisExtent=288,
     required this.itemBuilder,
   });
 
   final int itemCount;
-  final double? mainAxisCount;
+  final double? mainAxisExtent;
   final Widget Function(BuildContext context, int index) itemBuilder;
 
   @override
@@ -25,7 +25,7 @@ class UGridLayout extends StatelessWidget {
         crossAxisCount: 2,
         mainAxisSpacing: USizes.gridViewSpacing,
         crossAxisSpacing: USizes.gridViewSpacing,
-        mainAxisExtent: mainAxisCount,
+        mainAxisExtent: mainAxisExtent,
       ),
       itemBuilder: itemBuilder,
     );
