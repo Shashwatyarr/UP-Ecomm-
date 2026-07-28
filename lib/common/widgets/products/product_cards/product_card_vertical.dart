@@ -1,10 +1,12 @@
 import 'package:ecomm/common/custom_shapes/rounded_container.dart';
 import 'package:ecomm/common/widgets/icon/circular_icon.dart';
 import 'package:ecomm/common/widgets/images/rounded_image.dart';
+import 'package:ecomm/features/shop/screens/product_details/product_details.dart';
 import 'package:ecomm/utils/constants/colors.dart';
 import 'package:ecomm/utils/constants/images.dart';
 import 'package:ecomm/utils/helpers/helper_functions.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 
 import '../../../../utils/constants/sizes.dart';
@@ -20,7 +22,7 @@ class UProductCardVertical extends StatelessWidget {
   Widget build(BuildContext context) {
     final dark = UHelperFunctions.isDarkMode(context);
     return GestureDetector(
-      onTap: () {},
+      onTap: ()=>Get.to(()=>ProductDetailsScreen()),
       child: Container(
         width: 180,
         padding: const EdgeInsets.all(1),

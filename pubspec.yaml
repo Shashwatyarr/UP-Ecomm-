@@ -19,6 +19,7 @@ dependencies:
   get: ^4.7.3
   iconsax: ^0.0.8
   carousel_slider: ^5.1.2
+  readmore: ^3.0.0
 dev_dependencies:
   flutter_test:
     sdk: flutter
