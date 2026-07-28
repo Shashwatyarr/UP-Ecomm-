@@ -2,7 +2,6 @@ import 'package:ecomm/common/custom_shapes/rounded_container.dart';
 import 'package:ecomm/common/widgets/icon/circular_icon.dart';
 import 'package:ecomm/common/widgets/images/rounded_image.dart';
 import 'package:ecomm/utils/constants/colors.dart';
-import 'package:ecomm/utils/constants/enums.dart';
 import 'package:ecomm/utils/constants/images.dart';
 import 'package:ecomm/utils/helpers/helper_functions.dart';
 import 'package:flutter/material.dart';
@@ -10,7 +9,6 @@ import 'package:iconsax/iconsax.dart';
 
 import '../../../../utils/constants/sizes.dart';
 import '../../../styles/shadows.dart';
-import '../../texts/brand_title_text.dart';
 import '../../texts/brand_title_with_verify_icon.dart';
 import '../../texts/product_price_text.dart';
 import '../../texts/product_title_text.dart';
