@@ -1,4 +1,3 @@
-
 import 'package:ecomm/features/shop/controllers/home/home_controller.dart';
 import 'package:ecomm/features/shop/screens/home/widgets/Promo_slider.dart';
 import 'package:ecomm/features/shop/screens/home/widgets/home_appbar.dart';
@@ -28,6 +27,7 @@ class HomeScreen extends StatelessWidget {
               children: [
                 SizedBox(height: USizes.homePrimaryHeaderHeight + 10),
                 UPrimaryHeaderContainer(
+                  height: USizes.homePrimaryHeaderHeight,
                   child: Container(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -56,12 +56,15 @@ class HomeScreen extends StatelessWidget {
                       UImages.homeBanner5,
                     ],
                   ),
-                  const SizedBox(height: USizes.spaceBtwSections,),
-                  USectionHeading(title: 'Popular Products', onPressed: () {},),
-                  SizedBox(height: USizes.spaceBtwItems,),
-                  UGridLayout(itemCount: 6, itemBuilder: (context, index) {
-                    return UProductCardVertical();
-                  },)
+                  const SizedBox(height: USizes.spaceBtwSections),
+                  USectionHeading(title: 'Popular Products', onPressed: () {}),
+                  SizedBox(height: USizes.spaceBtwItems),
+                  UGridLayout(
+                    itemCount: 6,
+                    itemBuilder: (context, index) {
+                      return UProductCardVertical();
+                    },
+                  ),
                 ],
               ),
             ),
@@ -71,9 +74,3 @@ class HomeScreen extends StatelessWidget {
     );
   }
 }
-
-
-
-
-
-
