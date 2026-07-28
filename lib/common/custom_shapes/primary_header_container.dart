@@ -1,9 +1,9 @@
 import 'package:ecomm/utils/constants/sizes.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../../common/custom_shapes/circular_container.dart';
-import '../../../../../common/custom_shapes/clipper/rounded_edges_container.dart';
-import '../../../../../utils/constants/colors.dart';
+import 'circular_container.dart';
+import 'clipper/rounded_edges_container.dart';
+import '../../utils/constants/colors.dart';
 
 class UPrimaryHeaderContainer extends StatelessWidget {
   const UPrimaryHeaderContainer({

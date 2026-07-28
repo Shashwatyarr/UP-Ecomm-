@@ -8,6 +8,7 @@ class UImages{
   static const String googleIcon= 'assets/logo/google-icon.png';
   static const String accountCreatedImage='assets/images/account_created.png';
   static const String mailSentImage='assets/images/mail_illustration.png';
+  static const String profileLogo='assets/logo/profile.png';
   // categories icons
   static const String bagsIcon = 'assets/icons/categories/bag.png'; //------------
   static const String bedIcon = 'assets/icons/categories/bed.png'; //------------
@@ -206,4 +207,6 @@ class UImages{
   static const String nikeLogo = 'assets/brands/nike.png';
   static const String northStarLogo = 'assets/brands/north_star.jpg';
   static const String poloLogo = 'assets/brands/polo.png';
+
+
 }

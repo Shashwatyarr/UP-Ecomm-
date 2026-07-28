@@ -2,7 +2,7 @@ import 'package:ecomm/features/shop/controllers/home/home_controller.dart';
 import 'package:ecomm/features/shop/screens/home/widgets/Promo_slider.dart';
 import 'package:ecomm/features/shop/screens/home/widgets/home_appbar.dart';
 import 'package:ecomm/features/shop/screens/home/widgets/home_categories.dart';
-import 'package:ecomm/features/shop/screens/home/widgets/primary_header_container.dart';
+import 'package:ecomm/common/custom_shapes/primary_header_container.dart';
 import 'package:ecomm/utils/constants/images.dart';
 import 'package:ecomm/utils/constants/sizes.dart';
 import 'package:flutter/material.dart';
