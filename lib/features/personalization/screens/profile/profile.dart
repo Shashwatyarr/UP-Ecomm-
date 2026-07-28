@@ -1,6 +1,7 @@
 import 'package:ecomm/common/custom_shapes/primary_header_container.dart';
 import 'package:ecomm/common/widgets/images/circular_image.dart';
 import 'package:ecomm/common/widgets/texts/section_heading.dart';
+import 'package:ecomm/features/personalization/screens/address/address.dart';
 import 'package:ecomm/features/personalization/screens/profile/widgets/profile_primary_header.dart';
 import 'package:ecomm/features/personalization/screens/profile/widgets/setting_menu_tile.dart';
 import 'package:ecomm/features/personalization/screens/profile/widgets/user_profile_tile.dart';
@@ -8,6 +9,7 @@ import 'package:ecomm/utils/constants/images.dart';
 import 'package:ecomm/utils/constants/sizes.dart';
 import 'package:ecomm/utils/constants/texts.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 
 class ProfileScreen extends StatelessWidget {
@@ -36,16 +38,19 @@ class ProfileScreen extends StatelessWidget {
                     icon: Iconsax.safe_home,
                     title: 'My Addresses',
                     subtitle: 'Set shopping delivery addresses',
+                    onTap: () => Get.to(() => AddressScreen()),
                   ),
                   SettingMenuTile(
                     icon: Iconsax.shopping_cart,
                     title: 'My Cart',
                     subtitle: 'Add, remove products and move to checkout',
+                    onTap: () {},
                   ),
                   SettingMenuTile(
                     icon: Iconsax.bag_tick,
                     title: 'My Orders',
                     subtitle: 'In-progress and Completed Orders',
+                    onTap: () {},
                   ),
                   SizedBox(height: USizes.spaceBtwItems),
                   SizedBox(
