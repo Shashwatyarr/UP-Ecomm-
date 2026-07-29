@@ -38,6 +38,7 @@ flutter:
     - assets/logo/google-icon.png
     - assets/images/
     - assets/icons/categories/
+    - assets/icons/payment_methods/
     - assets/banners/
     - assets/products/
     - assets/brands/
