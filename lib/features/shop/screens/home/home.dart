@@ -1,4 +1,5 @@
 import 'package:ecomm/features/shop/controllers/home/home_controller.dart';
+import 'package:ecomm/features/shop/screens/all_products/all_products.dart';
 import 'package:ecomm/features/shop/screens/home/widgets/Promo_slider.dart';
 import 'package:ecomm/features/shop/screens/home/widgets/home_appbar.dart';
 import 'package:ecomm/features/shop/screens/home/widgets/home_categories.dart';
@@ -57,7 +58,7 @@ class HomeScreen extends StatelessWidget {
                     ],
                   ),
                   const SizedBox(height: USizes.spaceBtwSections),
-                  USectionHeading(title: 'Popular Products', onPressed: () {}),
+                  USectionHeading(title: 'Popular Products', onPressed: ()=>Get.to(()=>AllProductsScreen())),
                   SizedBox(height: USizes.spaceBtwItems),
                   UGridLayout(
                     itemCount: 6,
