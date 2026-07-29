@@ -5,7 +5,6 @@ import 'package:ecomm/utils/constants/images.dart';
 import 'package:ecomm/utils/constants/sizes.dart';
 import 'package:ecomm/utils/helpers/helper_functions.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 class UBillingPaymentSection extends StatelessWidget {
   const UBillingPaymentSection({super.key});

@@ -7,10 +7,8 @@ import 'package:ecomm/features/shop/screens/checkout/widgets/billing_address_sec
 import 'package:ecomm/features/shop/screens/checkout/widgets/billing_amount_section.dart';
 import 'package:ecomm/features/shop/screens/checkout/widgets/billing_payment_section.dart';
 import 'package:ecomm/navigation_menu.dart';
-import 'package:ecomm/utils/constants/colors.dart';
 import 'package:ecomm/utils/constants/images.dart';
 import 'package:ecomm/utils/constants/sizes.dart';
-import 'package:ecomm/utils/helpers/helper_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

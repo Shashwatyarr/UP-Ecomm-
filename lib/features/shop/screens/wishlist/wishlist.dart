@@ -2,11 +2,9 @@ import 'package:ecomm/common/widgets/appbar/appbar.dart';
 import 'package:ecomm/common/widgets/icon/circular_icon.dart';
 import 'package:ecomm/common/widgets/layouts/grid_layout.dart';
 import 'package:ecomm/common/widgets/products/product_cards/product_card_vertical.dart';
-import 'package:ecomm/features/shop/screens/home/home.dart';
 import 'package:ecomm/navigation_menu.dart';
 import 'package:ecomm/utils/constants/sizes.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 
 class WishlistScreen extends StatelessWidget {
