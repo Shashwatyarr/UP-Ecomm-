@@ -62,6 +62,4 @@ class ForgetPasswordController extends GetxController {
       );
     }
   }
-
-
 }

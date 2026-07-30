@@ -8,6 +8,14 @@ import '../../../utils/popups/snackbar_helpers.dart';
 class UserController extends GetxController {
   static UserController get instance => Get.find();
   final _userRepository=Get.put(UserRepository());
+  Rx<UserModel> user=UserModel.empty().obs;
+  RxBool profileLoading=false.obs;
+  @override
+  void onInit() {
+    fetchUserDetails();
+    super.onInit();
+  }
+
   Future<void> saveUserRecord(UserCredential userCredential) async {
     try {
       final nameParts = UserModel.nameParts(userCredential.user!.displayName);
@@ -26,5 +34,17 @@ class UserController extends GetxController {
       USnackBarHelpers.errorSnackBar(title: 'Data Not Saved', message: e.toString());
     }
   }
+  Future<void> fetchUserDetails() async{
 
+    try{
+      profileLoading.value=true;
+      UserModel user=await _userRepository.fetchUserDetails();
+      this.user(user);
+    }
+    catch(e){
+      user(UserModel.empty());
+    }finally{
+      profileLoading.value=false;
+    }
+  }
 }

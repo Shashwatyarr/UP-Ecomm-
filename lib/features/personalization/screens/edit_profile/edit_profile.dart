@@ -3,14 +3,19 @@ import 'package:ecomm/common/widgets/appbar/appbar.dart';
 import 'package:ecomm/common/widgets/texts/section_heading.dart';
 import 'package:ecomm/features/personalization/screens/edit_profile/widgets/user_profile_with_edit_icon.dart';
 import 'package:ecomm/utils/constants/sizes.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
+
+import '../../controllers/user_controller.dart';
 
 class EditProfileScreen extends StatelessWidget {
   const EditProfileScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final controller=UserController.instance;
     return Scaffold(
       appBar: UAppBar(
         showBackArrow: true,
@@ -33,12 +38,12 @@ class EditProfileScreen extends StatelessWidget {
               SizedBox(height: USizes.spaceBtwItems),
               UserDetailRow(
                 title: 'Name',
-                value: 'Shashwat Srivastava',
+                value: controller.user.value.fullName,
                 onTap: (){},
               ),
               UserDetailRow(
                 title: 'UserName',
-                value: '1Shashwat Srivastava',
+                value: controller.user.value.username,
                 onTap: (){},
               ),
               SizedBox(height: USizes.spaceBtwSections),
@@ -49,17 +54,17 @@ class EditProfileScreen extends StatelessWidget {
               SizedBox(height: USizes.spaceBtwItems),
               UserDetailRow(
                 title: 'User Id',
-                value: '30892675',
+                value: controller.user.value.id,
                 onTap: (){},
               ),
               UserDetailRow(
                 title: 'Email',
-                value: 'abs@gmail.com',
+                value: controller.user.value.email,
                 onTap: (){},
               ),
               UserDetailRow(
                 title: 'Phone Number',
-                value: '97896 37543',
+                value: controller.user.value.phoneNumber,
                 onTap: (){},
               ),
               UserDetailRow(
