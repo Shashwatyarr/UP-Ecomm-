@@ -4,15 +4,18 @@ import 'package:ecomm/features/authentication/screens/login/widgets/login_header
 import 'package:ecomm/utils/constants/sizes.dart';
 import 'package:ecomm/utils/constants/texts.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../../../../common/widgets/button/social_buttons.dart';
 import '../../../../common/widgets/login_signup/form_divider.dart';
+import '../../controllers/login/login_controller.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    Get.put(LoginController());
     return Scaffold(
       appBar: AppBar(),
       body: SingleChildScrollView(

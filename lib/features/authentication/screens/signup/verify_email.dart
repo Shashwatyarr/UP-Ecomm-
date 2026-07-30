@@ -5,23 +5,26 @@ import 'package:get/get.dart';
 
 import '../../../../common/styles/padding.dart';
 import '../../../../common/widgets/button/elevated_button.dart';
+import '../../../../data/repository/authentication_repository.dart';
 import '../../../../utils/constants/images.dart';
 import '../../../../utils/constants/sizes.dart';
 import '../../../../utils/constants/texts.dart';
 import '../../../../utils/helpers/device_helpers.dart';
+import '../../controllers/signup/verify_email_controller.dart';
 import '../login/login.dart';
 
 class VerifyEmailScreen extends StatelessWidget {
-  const VerifyEmailScreen({super.key});
-
+  const VerifyEmailScreen({super.key, this.email});
+  final String? email;
   @override
   Widget build(BuildContext context) {
+    final controller= Get.put(VerifyEmailController());
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
         actions: [
           IconButton(
-            onPressed: () => Get.offAll(() => LoginScreen()),
+            onPressed: AuthenticationRepository.instance.logout,
             icon: Icon(CupertinoIcons.clear),
           ),
         ],
@@ -42,7 +45,7 @@ class VerifyEmailScreen extends StatelessWidget {
               ),
               SizedBox(height: USizes.spaceBtwItems),
               Text(
-                'johndoe@gmail.com',
+                email??'',
                 style: Theme.of(context).textTheme.bodyMedium,
               ),
               SizedBox(height: USizes.spaceBtwItems),
@@ -53,20 +56,13 @@ class VerifyEmailScreen extends StatelessWidget {
               ),
               SizedBox(height: USizes.spaceBtwSections),
               UElevatedButton(
-                onPressed: () => Get.to(
-                  () => SuccessScreen(
-                    title: UTexts.accountCreatedTitle,
-                    subtitle: UTexts.accountCreatedSubTitle,
-                    image: UImages.accountCreatedImage,
-                    onTap: () {},
-                  ),
-                ),
+                onPressed: controller.checkEmailVerificationStatus,
                 child: Text(UTexts.uContinue),
               ),
               SizedBox(
                 width: double.infinity,
                 child: TextButton(
-                  onPressed: () {},
+                  onPressed:  controller.sendEmailVerification,
                   child: Text(UTexts.resendEmail),
                 ),
               ),

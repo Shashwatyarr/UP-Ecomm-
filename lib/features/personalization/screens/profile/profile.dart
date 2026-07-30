@@ -1,5 +1,6 @@
 
 import 'package:ecomm/common/widgets/texts/section_heading.dart';
+import 'package:ecomm/data/repository/authentication_repository.dart';
 import 'package:ecomm/features/personalization/screens/address/address.dart';
 import 'package:ecomm/features/personalization/screens/profile/widgets/profile_primary_header.dart';
 import 'package:ecomm/features/personalization/screens/profile/widgets/setting_menu_tile.dart';
@@ -54,7 +55,7 @@ class ProfileScreen extends StatelessWidget {
                   SizedBox(
                     width: double.infinity,
                     child: OutlinedButton(
-                      onPressed: () {},
+                      onPressed: AuthenticationRepository.instance.logout,
                       child: Text('Logout'),
                     ),
                   ),

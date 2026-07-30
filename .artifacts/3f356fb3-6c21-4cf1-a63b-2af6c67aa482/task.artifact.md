@@ -1,0 +1,3 @@
+- [ ] Update `UFirebaseException` to include `permission-denied` and other common Firestore errors.
+- [ ] Add print statements to `UserRepository` to log the exact error for debugging.
+- [ ] Update `UserRepository` to throw the exception message string.

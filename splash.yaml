@@ -1,12 +1,21 @@
 flutter_native_splash:
-  color: "#FFFFFF" #white
-  color_dark: "#000000" #black
+  color: "#FFFFFF"
+  color_dark: "#000000"
+
   image: assets/logo/black_app_logo.png
   image_dark: assets/logo/white_app_logo.png
 
+  # Android < 12
+  android_gravity: center
+
+  # iOS
+  ios_content_mode: center
+
+  # Android 12 - unchanged
   android_12:
-    color: "#FFFFFF" #white
-    color_dark: "#000000" #black
+    color: "#FFFFFF"
+    color_dark: "#000000"
     image: assets/logo/black_app_logo.png
     image_dark: assets/logo/white_app_logo.png
+
   web: false
