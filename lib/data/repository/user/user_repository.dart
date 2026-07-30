@@ -34,17 +34,18 @@ class UserRepository extends GetxController {
     }
   }
 
-  Future<UserModel> fetchUserDetails() async{
-    try{
-      final documentSnapshot=await _db.collection(UKeys.userCollection).doc(
-        AuthenticationRepository.instance.currentUser!.uid
-      ).get();
-      if(documentSnapshot.exists) {
+  Future<UserModel> fetchUserDetails() async {
+    try {
+      final documentSnapshot = await _db
+          .collection(UKeys.userCollection)
+          .doc(AuthenticationRepository.instance.currentUser!.uid)
+          .get();
+      if (documentSnapshot.exists) {
         UserModel user = UserModel.fromSnapshot(documentSnapshot);
         return user;
       }
       return UserModel.empty();
-    }on FirebaseAuthException catch (e) {
+    } on FirebaseAuthException catch (e) {
       throw UFirebaseAuthException(e.code).message;
     } on FirebaseException catch (e) {
       throw UFirebaseException(e.code);
@@ -57,4 +58,38 @@ class UserRepository extends GetxController {
     }
   }
 
+  Future<void> updateSingleField(Map<String, dynamic> map) async {
+    try {
+      await _db
+          .collection(UKeys.userCollection)
+          .doc(AuthenticationRepository.instance.currentUser!.uid)
+          .update(map);
+    } on FirebaseAuthException catch (e) {
+      throw UFirebaseAuthException(e.code).message;
+    } on FirebaseException catch (e) {
+      throw UFirebaseException(e.code);
+    } on FormatException catch (e) {
+      throw UFormatException();
+    } on PlatformException catch (e) {
+      throw UPlatformException(e.code).message;
+    } catch (e) {
+      throw 'Something went wrong. Please try again later';
+    }
+  }
+
+  Future<void> removeUserRecord(String id) async {
+    try {
+      await _db.collection(UKeys.userCollection).doc(id).delete();
+    }on FirebaseAuthException catch (e) {
+      throw UFirebaseAuthException(e.code).message;
+    } on FirebaseException catch (e) {
+      throw UFirebaseException(e.code);
+    } on FormatException catch (e) {
+      throw UFormatException();
+    } on PlatformException catch (e) {
+      throw UPlatformException(e.code).message;
+    } catch (e) {
+      throw 'Something went wrong. Please try again later';
+    }
+  }
 }

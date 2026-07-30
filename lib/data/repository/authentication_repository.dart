@@ -1,3 +1,4 @@
+import 'package:ecomm/data/repository/user/user_repository.dart';
 import 'package:ecomm/features/authentication/screens/login/login.dart';
 import 'package:ecomm/features/authentication/screens/onboarding/onboarding.dart';
 import 'package:ecomm/features/authentication/screens/signup/verify_email.dart';
@@ -134,13 +135,46 @@ class AuthenticationRepository extends GetxController {
       throw 'Something went wrong. Please try again later';
     }
   }
-
+  Future<void> reAuthenticateEmailAndPasswordUser(String email, String password) async {
+    try {
+      AuthCredential credential=EmailAuthProvider.credential(email: email, password: password);
+      await _auth.currentUser!.reauthenticateWithCredential(credential);
+    } on FirebaseAuthException catch (e) {
+      throw UFirebaseAuthException(e.code).message;
+    } on FirebaseException catch (e) {
+      throw UFirebaseException(e.code).message;
+    } on FormatException catch (e) {
+      throw UFormatException();
+    } on PlatformException catch (e) {
+      throw UPlatformException(e.code).message;
+    } catch (e) {
+      throw 'Something went wrong. Please try again later';
+    }
+  }
   Future<void> logout() async {
     try {
       await FirebaseAuth.instance.signOut();
       await GoogleSignIn.instance.signOut();
       Get.offAll(() => LoginScreen());
     } on FirebaseAuthException catch (e) {
+      throw UFirebaseAuthException(e.code).message;
+    } on FirebaseException catch (e) {
+      throw UFirebaseException(e.code).message;
+    } on FormatException catch (e) {
+      throw UFormatException();
+    } on PlatformException catch (e) {
+      throw UPlatformException(e.code).message;
+    } catch (e) {
+      throw 'Something went wrong. Please try again later';
+    }
+  }
+
+
+  Future<void> deleteAccount() async {
+    try{
+      await UserRepository.instance.removeUserRecord(currentUser!.uid);
+      await _auth.currentUser!.delete();
+    }on FirebaseAuthException catch (e) {
       throw UFirebaseAuthException(e.code).message;
     } on FirebaseException catch (e) {
       throw UFirebaseException(e.code).message;
