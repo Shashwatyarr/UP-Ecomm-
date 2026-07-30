@@ -1,5 +1,7 @@
+import 'package:ecomm/features/personalization/controllers/user_controller.dart';
 import 'package:ecomm/utils/constants/keys.dart';
 import 'package:ecomm/utils/popups/full_screen_loader.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -10,6 +12,8 @@ import '../../../../utils/popups/snackbar_helpers.dart';
 
 class LoginController extends GetxController {
   static LoginController get instance => Get.find();
+
+  final _userController=Get.put(UserController());
   final loginFormKey = GlobalKey<FormState>();
   RxBool isPasswordVisible = true.obs;
   final emailController = TextEditingController();
@@ -51,6 +55,27 @@ class LoginController extends GetxController {
       UFullScreenLoader.stopLoading();
       AuthenticationRepository.instance.screenRedirect();
     } catch (e) {
+      UFullScreenLoader.stopLoading();
+      USnackBarHelpers.errorSnackBar(title: 'Login Failed', message: e.toString());
+    }
+  }
+
+  Future<void> googleSignIn() async {
+    try{
+      UFullScreenLoader.openLoadingDialog('Loggin you in...');
+      final isConnected = await NetworkManager.instance.isConnected();
+      if (!isConnected) {
+        UFullScreenLoader.stopLoading();
+        USnackBarHelpers.warningSnackBar(title: 'No Internet Connection');
+      }
+      UserCredential userCredential=await AuthenticationRepository.instance.signInWithGoogle();
+
+      await _userController.saveUserRecord(userCredential);
+
+      UFullScreenLoader.stopLoading();
+      AuthenticationRepository.instance.screenRedirect();
+    }
+    catch(e){
       UFullScreenLoader.stopLoading();
       USnackBarHelpers.errorSnackBar(title: 'Login Failed', message: e.toString());
     }

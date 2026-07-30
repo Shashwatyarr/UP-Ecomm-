@@ -9,6 +9,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 import '../../utils/exceptions/firebase_exceptions.dart';
 import '../../utils/exceptions/format_exceptions.dart';
@@ -58,15 +59,36 @@ class AuthenticationRepository extends GetxController {
     }
   }
 
-  Future<UserCredential> loginWithEmailAndPassword(
-    String email,
-    String password,
-  ) async {
+  Future<UserCredential> loginWithEmailAndPassword(String email, String password,) async {
     try {
       UserCredential userCredential = await _auth.signInWithEmailAndPassword(
         email: email,
         password: password,
       );
+      return userCredential;
+    } on FirebaseAuthException catch (e) {
+      throw UFirebaseAuthException(e.code).message;
+    } on FirebaseException catch (e) {
+      throw UFirebaseException(e.code).message;
+    } on FormatException catch (e) {
+      throw UFormatException();
+    } on PlatformException catch (e) {
+      throw UPlatformException(e.code).message;
+    } catch (e) {
+      throw 'Something went wrong. Please try again later';
+    }
+  }
+
+  Future<UserCredential> signInWithGoogle() async {
+    try {
+      GoogleSignIn googleSignIn=GoogleSignIn.instance;
+      await googleSignIn.initialize();
+      GoogleSignInAccount account = await googleSignIn.authenticate();
+
+      final OAuthCredential credential = GoogleAuthProvider.credential(
+        idToken: account.authentication.idToken,
+      );
+      UserCredential userCredential = await _auth.signInWithCredential(credential);
       return userCredential;
     } on FirebaseAuthException catch (e) {
       throw UFirebaseAuthException(e.code).message;
@@ -100,6 +122,7 @@ class AuthenticationRepository extends GetxController {
   Future<void> logout() async {
     try {
       await FirebaseAuth.instance.signOut();
+      await GoogleSignIn.instance.signOut();
       Get.offAll(() => LoginScreen());
     } on FirebaseAuthException catch (e) {
       throw UFirebaseAuthException(e.code).message;
