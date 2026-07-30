@@ -7,11 +7,15 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 
+import '../../../../utils/validators/validation.dart';
+import '../../controllers/forget_password/forget_controller_controller.dart';
+
 class ForgetPasswordScreen extends StatelessWidget {
   const ForgetPasswordScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(ForgetPasswordController());
     return Scaffold(
       appBar: AppBar(),
       body: SingleChildScrollView(
@@ -26,16 +30,21 @@ class ForgetPasswordScreen extends StatelessWidget {
                 SizedBox(height: USizes.spaceBtwSections*2,),
                 Column(
                   children: [
-                    TextFormField(
-                      decoration: InputDecoration(
-                        labelText: UTexts.email,
-                        prefixIcon: Icon(Iconsax.direct_right),
+                    Form(
+                      key: controller.forgetPasswordFormKey,
+                      child: TextFormField(
+                        controller: controller.email,
+                        validator: UValidator.validateEmail,
+                        decoration: InputDecoration(
+                          labelText: UTexts.email,
+                          prefixIcon: Icon(Iconsax.direct_right),
+                        ),
                       ),
                     )
                   ],
                 ),
                 SizedBox(height: USizes.spaceBtwItems,),
-                UElevatedButton(onPressed: ()=>Get.to(()=>ResetPasswordScreen()), child: Text(UTexts.submit)),
+                UElevatedButton(onPressed: controller.sendPasswordResetEmail, child: Text(UTexts.submit)),
               ],
             )
         ),
