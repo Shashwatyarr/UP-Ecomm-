@@ -30,7 +30,7 @@ class onBoardingController extends GetxController{
   }
 
   void skipPage(){
-    currentIndex.value=2;
-    pageController.jumpToPage(currentIndex.value);
+    storage.write('isFirstTime', false);
+    Get.offAll(()=>LoginScreen());
   }
 }

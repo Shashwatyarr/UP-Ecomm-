@@ -1,4 +1,4 @@
-- [x] Improve error handling in `CloudinaryServices`
-- [x] Add connectivity check to `CategoryRepository.uploadCategories`
-- [x] Update `AuthenticationRepository.onReady` for connectivity check
-- [x] Verify build stability
+- [x] Fix hardcoded tabs in `UTabBar`
+- [x] Fix `isFirstTime` persistence in `OnboardingController`
+- [x] Correct `GetStorage` initialization order in `main.dart`
+- [x] Verify TabBar and Onboarding behavior

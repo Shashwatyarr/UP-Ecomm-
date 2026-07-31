@@ -13,13 +13,7 @@ class UTabBar extends StatelessWidget implements PreferredSizeWidget {
     return Material(
       color: dark ? UColors.black : UColors.white,
       child: TabBar(
-        tabs: [
-          Tab(child: Text('Sports')),
-          Tab(child: Text('Furniture')),
-          Tab(child: Text('Electronics')),
-          Tab(child: Text('Clothes')),
-          Tab(child: Text('Cosmetics')),
-        ],
+        tabs: tabs,
         isScrollable: true,
         labelColor: dark?UColors.white:UColors.primary,
         unselectedLabelColor: UColors.dark,

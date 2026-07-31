@@ -1,24 +1,32 @@
-# Fix False Positive Connectivity and Debug Emulator Networking
+# Fix TabBar Length Mismatch and Onboarding Persistence
 
-The app's `NetworkManager` currently only checks if the device is connected to a network (WiFi/Mobile), but it doesn't verify if that network actually provides internet access. This leads to crashes when the emulator is "connected" to the virtual router but has no external DNS resolution (as seen with `Failed host lookup`).
+This plan addresses two issues:
+1.  **TabBar Error**: "Controller's length property (6) does not match the number of tabs (5)". This is caused by hardcoded tabs in the `UTabBar` widget.
+2.  **Onboarding Issue**: Onboarding screen appearing on every restart. This is likely due to the "skip" action not saving the state and potential logic improvements in the redirection.
 
 ## Proposed Changes
 
-### Helper Functions
+### Common Widgets
 
-#### [MODIFY] [network_manager.dart](file:///D:/ecomm/lib/utils/helpers/network_manager.dart)
-- Update `isConnected()` to perform a real internet check by attempting to lookup a common host (like `google.com`) or pinging a reliable IP.
-- This will prevent the app from attempting network calls when the emulator's internet is broken.
+#### [MODIFY] [tabbar.dart](file:///D:/ecomm/lib/common/widgets/appbar/tabbar.dart)
+- Remove the hardcoded `tabs` list inside the `build` method.
+- Use the `tabs` list passed through the constructor.
+
+### Authentication Feature
+
+#### [MODIFY] [onboarding_controller.dart](file:///D:/ecomm/lib/features/authentication/controllers/onboarding/onboarding_controller.dart)
+- Update `skipPage` to optionally save the `isFirstTime` state and navigate to `LoginScreen` directly, OR just ensure that any navigation away from Onboarding marks it as completed.
+- *Decision*: I will make `skipPage` immediately mark onboarding as done and redirect to `LoginScreen` to avoid confusion.
+
+#### [MODIFY] [authentication_repository.dart](file:///D:/ecomm/lib/data/repository/authentication_repository.dart)
+- Simplify the `screenRedirect` logic to be more robust.
 
 ## Verification Plan
 
 ### Manual Verification
-- Restart the app.
-- If the emulator's internet is still broken, `NetworkManager` should now correctly return `false`, and you should see the "No Internet Connection" snackbar instead of a crash.
-
-## Critical Emulator Fix (Action Required)
-> [!CAUTION]
-> If your emulator continues to show "Failed host lookup", it is a configuration issue on your computer. Please try these steps in order:
-> 1. **Cold Boot Emulator**: In Android Studio Device Manager, click the down arrow next to your emulator and select **"Cold Boot Now"**.
-> 2. **Check DNS**: Ensure your host PC is not using a VPN or proxy that might interfere with the emulator.
-> 3. **Sync Time**: Ensure the emulator's date and time match your computer.
+1.  **TabBar**: Open the "Store" screen. Verify that the tabs match the categories fetched from the database and no crash occurs.
+2.  **Onboarding**:
+    - Run the app for the first time.
+    - Click "Skip" or "Get Started".
+    - Restart the app.
+    - Verify that it goes directly to the Login/Home screen instead of Onboarding.

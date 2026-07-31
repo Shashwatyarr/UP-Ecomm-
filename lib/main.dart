@@ -11,14 +11,19 @@ import "my_app.dart";
 Future<void> main() async{
   //widgets flutter binding
   final widgetsBinding= WidgetsFlutterBinding.ensureInitialized();
+
+  //init local storage
+  await GetStorage.init();
+
+  //flutter native splash
+  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
+
+  //firebase
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   ).then((value){
     Get.put(AuthenticationRepository());
   });
-  await GetStorage.init();
-  //flutter native splash
-  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
 
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   runApp(const MyApp());

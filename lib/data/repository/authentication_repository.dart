@@ -38,10 +38,12 @@ class AuthenticationRepository extends GetxController {
         Get.offAll(() => VerifyEmailScreen(email: user.email));
       }
     } else {
-      localstorage.writeIfNull('isFirstTime', true);
-      localstorage.read('isFirstTime') != true
-          ? Get.to(() => LoginScreen())
-          : Get.to(() => OnboardingScreen());
+      bool isFirstTime = localstorage.read('isFirstTime') ?? true;
+      if (isFirstTime) {
+        Get.offAll(() => OnboardingScreen());
+      } else {
+        Get.offAll(() => LoginScreen());
+      }
     }
   }
 
