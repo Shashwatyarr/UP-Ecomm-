@@ -1,2 +1,4 @@
-- [x] Update `UCircularImage` to support `NetworkImage`
-- [x] Verify image loading in the app
+- [x] Improve error handling in `CloudinaryServices`
+- [x] Add connectivity check to `CategoryRepository.uploadCategories`
+- [x] Update `AuthenticationRepository.onReady` for connectivity check
+- [x] Verify build stability

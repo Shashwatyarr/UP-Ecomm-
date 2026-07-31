@@ -15,11 +15,13 @@ import '../../../utils/exceptions/firebase_auth_exceptions.dart';
 import '../../../utils/exceptions/firebase_exceptions.dart';
 import '../../../utils/exceptions/format_exceptions.dart';
 import '../../../utils/exceptions/platform_exceptions.dart';
+import '../../services/cloudinary_services.dart';
 import '../authentication_repository.dart';
 
 class UserRepository extends GetxController {
   static UserRepository get instance => Get.find();
   final _db = FirebaseFirestore.instance;
+  final _cloudinaryServices=Get.put(CloudinaryServices());
 
   Future<void> saveUserRecord(UserModel user) async {
     try {
@@ -101,16 +103,7 @@ class UserRepository extends GetxController {
 
   Future<dio.Response> uploadImage(File image) async {
     try {
-      String api = UApiUrls.uploadApi(UKeys.cloudName);
-      dio.FormData formData = dio.FormData.fromMap({
-        'upload_preset': UKeys.uploadPreset,
-        'folder': UKeys.profileFolder,
-        'file': await dio.MultipartFile.fromFile(image.path,
-            filename: image.path
-                .split('/')
-                .last),
-      });
-      dio.Response response = await dio.Dio().post(api, data: formData);
+      dio.Response response = await _cloudinaryServices.uploadImage(image, UKeys.profileFolder);
       return response;
     } catch (e) {
       throw 'Something went wrong. Please try again later';
@@ -119,20 +112,7 @@ class UserRepository extends GetxController {
 
   Future<dio.Response> deleteUserProfilePicture(String publicId) async {
     try {
-      String api = UApiUrls.deleteApi(UKeys.cloudName);
-      String signatureBase = 'public_id=$publicId&timestamp=${(DateTime
-          .now()
-          .millisecondsSinceEpoch / 1000).round()}${UKeys.apiSecret}';
-      String signature = sha1.convert(utf8.encode(signatureBase)).toString();
-      dio.FormData formData = dio.FormData.fromMap({
-        'public_id': publicId,
-        'api_key': UKeys.apiKey,
-        'timestamp': (DateTime
-            .now()
-            .millisecondsSinceEpoch / 1000).round(),
-        'signature':signature
-      });
-      dio.Response response = await dio.Dio().post(api, data: formData);
+      dio.Response response = await _cloudinaryServices.deleteImage(publicId);
       return response;
     } catch (e) {
       throw 'Something went wrong. Please try again later';

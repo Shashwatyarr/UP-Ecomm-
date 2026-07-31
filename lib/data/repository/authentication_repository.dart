@@ -1,4 +1,6 @@
+import 'package:ecomm/data/repository/category/category_repository.dart';
 import 'package:ecomm/data/repository/user/user_repository.dart';
+import 'package:ecomm/dummy_data.dart';
 import 'package:ecomm/features/authentication/screens/login/login.dart';
 import 'package:ecomm/features/authentication/screens/onboarding/onboarding.dart';
 import 'package:ecomm/features/authentication/screens/signup/verify_email.dart';

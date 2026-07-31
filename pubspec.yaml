@@ -25,6 +25,7 @@ dependencies:
   dio: ^5.7.0
   crypto: ^3.0.7
   cached_network_image: ^3.4.1
+  path_provider: ^2.1.6
   #state management
   get_storage: ^2.1.1
   get: ^4.7.3

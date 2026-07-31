@@ -1,21 +1,24 @@
-# Implement Cached Network Image for URoundedImage
+# Fix False Positive Connectivity and Debug Emulator Networking
 
-The `URoundedImage` widget currently uses standard `NetworkImage`, which does not provide persistent caching or a loading state (shimmer). We will update it to use `CachedNetworkImage` to improve performance and user experience.
+The app's `NetworkManager` currently only checks if the device is connected to a network (WiFi/Mobile), but it doesn't verify if that network actually provides internet access. This leads to crashes when the emulator is "connected" to the virtual router but has no external DNS resolution (as seen with `Failed host lookup`).
 
 ## Proposed Changes
 
-### Common Widgets
+### Helper Functions
 
-#### [MODIFY] [rounded_image.dart](file:///D:/ecomm/lib/common/widgets/images/rounded_image.dart)
-- Import `package:cached_network_image/cached_network_image.dart`.
-- Import `package:ecomm/common/widgets/shimmer/shimmer_effect.dart`.
-- Update the `build` method to use `CachedNetworkImage` when `isNetworkImage` is true.
-- Add `progressIndicatorBuilder` with `UShimmerEffect`.
-- Add `errorWidget` to show an error icon if loading fails.
+#### [MODIFY] [network_manager.dart](file:///D:/ecomm/lib/utils/helpers/network_manager.dart)
+- Update `isConnected()` to perform a real internet check by attempting to lookup a common host (like `google.com`) or pinging a reliable IP.
+- This will prevent the app from attempting network calls when the emulator's internet is broken.
 
 ## Verification Plan
 
 ### Manual Verification
-- Run the app and navigate to screens using `URoundedImage` with network images (e.g., product cards if they use network images).
-- Verify that a shimmer effect is shown while the image is loading.
-- Verify that the image is cached and loads faster on subsequent views.
+- Restart the app.
+- If the emulator's internet is still broken, `NetworkManager` should now correctly return `false`, and you should see the "No Internet Connection" snackbar instead of a crash.
+
+## Critical Emulator Fix (Action Required)
+> [!CAUTION]
+> If your emulator continues to show "Failed host lookup", it is a configuration issue on your computer. Please try these steps in order:
+> 1. **Cold Boot Emulator**: In Android Studio Device Manager, click the down arrow next to your emulator and select **"Cold Boot Now"**.
+> 2. **Check DNS**: Ensure your host PC is not using a VPN or proxy that might interfere with the emulator.
+> 3. **Sync Time**: Ensure the emulator's date and time match your computer.
