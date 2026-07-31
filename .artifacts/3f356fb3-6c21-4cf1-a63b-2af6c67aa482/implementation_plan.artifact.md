@@ -1,41 +1,21 @@
-# Debug and Fix Firestore Collection Creation Issue
+# Implement Cached Network Image for URoundedImage
 
-The user is experiencing an "unexpected Firebase error" when trying to save a user record to Firestore. This usually happens when Firestore is not enabled, security rules are blocking the request, or the configuration is incorrect.
-
-## User Review Required
-
-> [!IMPORTANT]
-> To fix the "collection nhi banra" (collection not creating) issue, you must verify the following in your **Firebase Console**:
-> 1. **Firestore Database Enabled**: Go to "Firestore Database" and ensure you have clicked "Create Database".
-> 2. **Security Rules**: In the "Rules" tab of Firestore, ensure they are set to allow writes. A common starting point for development is:
->    ```
->    rules_version = '2';
->    service cloud.firestore {
->      match /databases/{database}/documents {
->        match /{document=**} {
->          allow read, write: if request.auth != null;
->        }
->      }
->    }
->    ```
-> 3. **Firebase Region**: Ensure you have selected a location for your database.
+The `URoundedImage` widget currently uses standard `NetworkImage`, which does not provide persistent caching or a loading state (shimmer). We will update it to use `CachedNetworkImage` to improve performance and user experience.
 
 ## Proposed Changes
 
-### Data Layer
+### Common Widgets
 
-#### [MODIFY] [user_repository.dart](file:///D:/ecomm/lib/data/repository/user/user_repository.dart)
-- Update the `catch` block to print the actual error code and message to the console. This will help identify the exact problem (e.g., `permission-denied`).
-- Add `permission-denied` handling in `UFirebaseException` to provide a better error message.
-
-#### [MODIFY] [firebase_exceptions.dart](file:///D:/ecomm/lib/utils/exceptions/firebase_exceptions.dart)
-- Add missing common Firestore error codes like `permission-denied`, `unavailable`, and `not-found`.
+#### [MODIFY] [rounded_image.dart](file:///D:/ecomm/lib/common/widgets/images/rounded_image.dart)
+- Import `package:cached_network_image/cached_network_image.dart`.
+- Import `package:ecomm/common/widgets/shimmer/shimmer_effect.dart`.
+- Update the `build` method to use `CachedNetworkImage` when `isNetworkImage` is true.
+- Add `progressIndicatorBuilder` with `UShimmerEffect`.
+- Add `errorWidget` to show an error icon if loading fails.
 
 ## Verification Plan
 
 ### Manual Verification
-- Update the code to print the exact error.
-- Run the app and try to sign up again.
-- Check the debug console for the error output.
-- Adjust Firestore rules based on the error.
-- Verify that the "Users" collection appears in the Firebase Console.
+- Run the app and navigate to screens using `URoundedImage` with network images (e.g., product cards if they use network images).
+- Verify that a shimmer effect is shown while the image is loading.
+- Verify that the image is cached and loads faster on subsequent views.

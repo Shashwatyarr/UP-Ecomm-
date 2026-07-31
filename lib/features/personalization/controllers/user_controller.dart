@@ -1,13 +1,18 @@
+import 'dart:io';
+
+import 'package:dio/dio.dart' as dio;
 import 'package:ecomm/features/authentication/models/user_model.dart';
 import 'package:ecomm/features/authentication/screens/login/login.dart';
 import 'package:ecomm/utils/constants/sizes.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:get/get.dart' hide Response;
+import 'package:image_picker/image_picker.dart';
 
 import '../../../data/repository/authentication_repository.dart';
 import '../../../data/repository/user/user_repository.dart';
+import '../../../utils/constants/apis.dart';
+import '../../../utils/constants/keys.dart';
 import '../../../utils/helpers/network_manager.dart';
 import '../../../utils/popups/full_screen_loader.dart';
 import '../../../utils/popups/snackbar_helpers.dart';
@@ -23,6 +28,7 @@ class UserController extends GetxController {
   final verifyPassword = TextEditingController();
   final reAuthFormKey = GlobalKey<FormState>();
   RxBool hidePassword = true.obs;
+  RxBool isProfileUploading = false.obs;
 
   @override
   void onInit() {
@@ -32,6 +38,8 @@ class UserController extends GetxController {
 
   Future<void> saveUserRecord(UserCredential userCredential) async {
     try {
+      await fetchUserDetails();
+      if(user.value.id.isNotEmpty) return;
       final nameParts = UserModel.nameParts(userCredential.user!.displayName);
       final username = '${userCredential.user!.displayName}234689';
       UserModel userModel = UserModel(
@@ -136,4 +144,48 @@ class UserController extends GetxController {
       USnackBarHelpers.errorSnackBar(title: 'Re-Authentication Failed', message: e.toString());
     }
   }
+
+  Future<void> updateUserProfilePicture() async {
+    try {
+      isProfileUploading.value=true;
+      XFile? image = await ImagePicker()
+          .pickImage(source: ImageSource.gallery, maxHeight: 512, maxWidth: 512);
+      if (image == null) return;
+
+      UFullScreenLoader.openLoadingDialog('Uploading Profile Picture...');
+      File file = File(image.path);
+      if(user.value.publicId.isNotEmpty){
+        await _userRepository.deleteUserProfilePicture(user.value.publicId);
+      }
+      dio.Response response = await _userRepository.uploadImage(file);
+      if(response.statusCode==200){
+        final data=response.data;
+        final imageUrl=data['url'];
+        final publicId=data['public_id'];
+        await _userRepository.updateSingleField({'profilePicture':imageUrl,'publicId':publicId,});
+        user.value.profilePicture=imageUrl;
+        user.value.publicId=publicId;
+
+        user.refresh();
+        USnackBarHelpers.successSnackBar(
+            title: 'Congratulations',
+            message: 'Your Profile Image has been updated!');
+      }
+      else{
+        throw 'Something went wrong. Please try again later';
+      }
+
+
+      UFullScreenLoader.stopLoading();
+      USnackBarHelpers.successSnackBar(
+          title: 'Congratulations',
+          message: 'Your Profile Image has been updated!');
+    } catch (e) {
+      UFullScreenLoader.stopLoading();
+      USnackBarHelpers.errorSnackBar(title: 'Oh Snap!', message: e.toString());
+    }finally{
+      isProfileUploading.value=false;
+    }
+  }
+
 }
