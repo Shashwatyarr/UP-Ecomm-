@@ -1,4 +1,0 @@
-- [x] Fix hardcoded tabs in `UTabBar`
-- [x] Fix `isFirstTime` persistence in `OnboardingController`
-- [x] Correct `GetStorage` initialization order in `main.dart`
-- [x] Verify TabBar and Onboarding behavior
