@@ -50,14 +50,16 @@ class UCircularImage extends StatelessWidget {
       child: ClipRRect(
         borderRadius: BorderRadius.circular(100),
         child: isNetworkImage
-            ? CachedNetworkImage(
-                fit: fit,
-                color: overlayColor,
-                progressIndicatorBuilder: (context, url, progress) =>
-                    UShimmerEffect(width: 55, height: 55),
-                errorWidget: (context, url, error) => Icon(Icons.error),
-                imageUrl: image,
-              )
+            ? image.isNotEmpty
+                ? CachedNetworkImage(
+                    fit: fit,
+                    color: overlayColor,
+                    progressIndicatorBuilder: (context, url, progress) =>
+                        const UShimmerEffect(width: 55, height: 55),
+                    errorWidget: (context, url, error) => const Icon(Icons.error),
+                    imageUrl: image,
+                  )
+                : const Icon(Icons.error)
             : Image(
                 fit: fit,
                 image: AssetImage(image) as ImageProvider,

@@ -3,6 +3,7 @@ import 'package:ecomm/routes/routes.dart';
 
 import '../utils/constants/images.dart';
 import 'features/shop/models/banner_model.dart';
+import 'features/shop/models/brand_model.dart';
 import 'features/shop/models/category_model.dart';
 
 class UDummyData {
@@ -56,87 +57,87 @@ class UDummyData {
     CategoryModel(id: '23', name: 'Soccer', image: UImages.soccerIcon, parentId: '6', isFeatured: false),
   ];
 
-  /// List of all Brands
-  // static final List<BrandModel> brands = [
-  //   BrandModel(
-  //       id: '1',
-  //       image: 'https://res.cloudinary.com/dx4o5amce/image/upload/v1746712693/Brands%20Images/tl9wjbj77zeo9qul3eq2.png',
-  //       name: 'Nike',
-  //       productsCount: 2,
-  //       isFeatured: true),
-  //   BrandModel(
-  //       id: '2',
-  //       image: 'https://res.cloudinary.com/dx4o5amce/image/upload/v1746712696/Brands%20Images/fdxer5l7qrisfyff2c9x.jpg',
-  //       name: 'Adidas',
-  //       productsCount: 2,
-  //       isFeatured: true),
-  //   BrandModel(
-  //       id: '3',
-  //       image: 'https://res.cloudinary.com/dx4o5amce/image/upload/v1746712697/Brands%20Images/rgoe3o3qptrjun5fmoqe.jpg',
-  //       name: 'Apple',
-  //       productsCount: 8,
-  //       isFeatured: true),
-  //   BrandModel(
-  //       id: '4',
-  //       image: 'https://res.cloudinary.com/dx4o5amce/image/upload/v1746712698/Brands%20Images/mcwd8faen7iogfrpt0ts.png',
-  //       name: 'Bata',
-  //       productsCount: 4,
-  //       isFeatured: true),
-  //   BrandModel(
-  //       id: '5',
-  //       image: 'https://res.cloudinary.com/dx4o5amce/image/upload/v1746712699/Brands%20Images/peojxxvbvsv4grldfliu.png',
-  //       name: 'Bloody',
-  //       productsCount: 9,
-  //       isFeatured: false),
-  //   BrandModel(
-  //       id: '6',
-  //       image: 'https://res.cloudinary.com/dx4o5amce/image/upload/v1746712701/Brands%20Images/cc0yugmbnl6l3r9fxzej.jpg',
-  //       name: 'Breakout',
-  //       productsCount: 7,
-  //       isFeatured: true),
-  //   BrandModel(
-  //       id: '7',
-  //       image: 'https://res.cloudinary.com/dx4o5amce/image/upload/v1746712702/Brands%20Images/uija31c12nklaouz40rg.png',
-  //       name: 'Dari Mooch',
-  //       productsCount: 4,
-  //       isFeatured: true),
-  //   BrandModel(
-  //       id: '8',
-  //       image: 'https://res.cloudinary.com/dx4o5amce/image/upload/v1746712703/Brands%20Images/e1ymwagv5db0cvsrdqfo.jpg',
-  //       name: 'Interwood',
-  //       productsCount: 9,
-  //       isFeatured: false),
-  //   BrandModel(
-  //       id: '9',
-  //       image: 'https://res.cloudinary.com/dx4o5amce/image/upload/v1746712705/Brands%20Images/hih7hp1324alvlptfsi5.jpg',
-  //       name: 'HP',
-  //       productsCount: 4,
-  //       isFeatured: false),
-  //   BrandModel(
-  //       id: '10',
-  //       image: 'https://res.cloudinary.com/dx4o5amce/image/upload/v1746712706/Brands%20Images/hzi6y2n8km7hsqfl0m4k.png',
-  //       name: 'J.',
-  //       productsCount: 8,
-  //       isFeatured: true),
-  //   BrandModel(
-  //       id: '11',
-  //       image: 'https://res.cloudinary.com/dx4o5amce/image/upload/v1746712707/Brands%20Images/ehasbyoowj8srvurhqvq.png',
-  //       name: 'NDURE',
-  //       productsCount: 4,
-  //       isFeatured: true),
-  //   BrandModel(
-  //       id: '12',
-  //       image: 'https://res.cloudinary.com/dx4o5amce/image/upload/v1746712709/Brands%20Images/ox9ir27nmkpj7fniwshs.jpg',
-  //       name: 'NorthStar',
-  //       productsCount: 2,
-  //       isFeatured: true),
-  //   BrandModel(
-  //       id: '13',
-  //       image: 'https://res.cloudinary.com/dx4o5amce/image/upload/v1746712710/Brands%20Images/xd3q9uwpkp9tlkc8u7ga.png',
-  //       name: 'Polo',
-  //       productsCount: 2,
-  //       isFeatured: true),
-  // ];
+   //List of all Brands
+  static final List<BrandModel> brands = [
+    BrandModel(
+        id: '1',
+        image: 'https://res.cloudinary.com/dx4o5amce/image/upload/v1746712693/Brands%20Images/tl9wjbj77zeo9qul3eq2.png',
+        name: 'Nike',
+        productsCount: 2,
+        isFeatured: true),
+    BrandModel(
+        id: '2',
+        image: 'https://res.cloudinary.com/dx4o5amce/image/upload/v1746712696/Brands%20Images/fdxer5l7qrisfyff2c9x.jpg',
+        name: 'Adidas',
+        productsCount: 2,
+        isFeatured: true),
+    BrandModel(
+        id: '3',
+        image: 'https://res.cloudinary.com/dx4o5amce/image/upload/v1746712697/Brands%20Images/rgoe3o3qptrjun5fmoqe.jpg',
+        name: 'Apple',
+        productsCount: 8,
+        isFeatured: true),
+    BrandModel(
+        id: '4',
+        image: 'https://res.cloudinary.com/dx4o5amce/image/upload/v1746712698/Brands%20Images/mcwd8faen7iogfrpt0ts.png',
+        name: 'Bata',
+        productsCount: 4,
+        isFeatured: true),
+    BrandModel(
+        id: '5',
+        image: 'https://res.cloudinary.com/dx4o5amce/image/upload/v1746712699/Brands%20Images/peojxxvbvsv4grldfliu.png',
+        name: 'Bloody',
+        productsCount: 9,
+        isFeatured: false),
+    BrandModel(
+        id: '6',
+        image: 'https://res.cloudinary.com/dx4o5amce/image/upload/v1746712701/Brands%20Images/cc0yugmbnl6l3r9fxzej.jpg',
+        name: 'Breakout',
+        productsCount: 7,
+        isFeatured: true),
+    BrandModel(
+        id: '7',
+        image: 'https://res.cloudinary.com/dx4o5amce/image/upload/v1746712702/Brands%20Images/uija31c12nklaouz40rg.png',
+        name: 'Dari Mooch',
+        productsCount: 4,
+        isFeatured: true),
+    BrandModel(
+        id: '8',
+        image: 'https://res.cloudinary.com/dx4o5amce/image/upload/v1746712703/Brands%20Images/e1ymwagv5db0cvsrdqfo.jpg',
+        name: 'Interwood',
+        productsCount: 9,
+        isFeatured: false),
+    BrandModel(
+        id: '9',
+        image: 'https://res.cloudinary.com/dx4o5amce/image/upload/v1746712705/Brands%20Images/hih7hp1324alvlptfsi5.jpg',
+        name: 'HP',
+        productsCount: 4,
+        isFeatured: false),
+    BrandModel(
+        id: '10',
+        image: 'https://res.cloudinary.com/dx4o5amce/image/upload/v1746712706/Brands%20Images/hzi6y2n8km7hsqfl0m4k.png',
+        name: 'J.',
+        productsCount: 8,
+        isFeatured: true),
+    BrandModel(
+        id: '11',
+        image: 'https://res.cloudinary.com/dx4o5amce/image/upload/v1746712707/Brands%20Images/ehasbyoowj8srvurhqvq.png',
+        name: 'NDURE',
+        productsCount: 4,
+        isFeatured: true),
+    BrandModel(
+        id: '12',
+        image: 'https://res.cloudinary.com/dx4o5amce/image/upload/v1746712709/Brands%20Images/ox9ir27nmkpj7fniwshs.jpg',
+        name: 'NorthStar',
+        productsCount: 2,
+        isFeatured: true),
+    BrandModel(
+        id: '13',
+        image: 'https://res.cloudinary.com/dx4o5amce/image/upload/v1746712710/Brands%20Images/xd3q9uwpkp9tlkc8u7ga.png',
+        name: 'Polo',
+        productsCount: 2,
+        isFeatured: true),
+  ];
   //
   // /// List of all products - 68 Products
   // static final List<ProductModel> products = [

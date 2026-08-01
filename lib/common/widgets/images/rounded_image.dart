@@ -1,3 +1,5 @@
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:ecomm/common/widgets/shimmer/shimmer_effect.dart';
 import 'package:flutter/material.dart';
 
 import '../../../utils/constants/sizes.dart';
@@ -46,9 +48,20 @@ class URoundedImage extends StatelessWidget {
           borderRadius: applyImageRadius
               ? BorderRadius.circular(borderRadius)
               : BorderRadius.zero,
-          child:Image(image: isNetworkImage
-              ? NetworkImage(imageUrl)
-              :  AssetImage(imageUrl), fit: fit),
+          child: isNetworkImage
+              ? imageUrl.isNotEmpty
+                  ? CachedNetworkImage(
+                      imageUrl: imageUrl,
+                      fit: fit,
+                      progressIndicatorBuilder: (context, url, downloadProgress) =>
+                          const UShimmerEffect(width: double.infinity, height: double.infinity),
+                      errorWidget: (context, url, error) => const Icon(Icons.error),
+                    )
+                  : const Icon(Icons.error)
+              : Image(
+                  image: AssetImage(imageUrl) as ImageProvider,
+                  fit: fit,
+                ),
         ),
       ),
     );

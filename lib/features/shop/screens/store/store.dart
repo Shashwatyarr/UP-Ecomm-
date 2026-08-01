@@ -1,4 +1,4 @@
-
+import 'package:ecomm/common/widgets/shimmer/brands_shimmer.dart';
 import 'package:ecomm/common/widgets/texts/section_heading.dart';
 import 'package:ecomm/features/shop/controllers/category/category_controller.dart';
 import 'package:ecomm/features/shop/screens/brands/all_brands.dart';
@@ -11,6 +11,7 @@ import 'package:get/get.dart';
 import '../../../../common/widgets/appbar/tabbar.dart';
 import '../../../../common/widgets/brands/brand_cart.dart';
 import '../../../../utils/constants/sizes.dart';
+import '../../controllers/brand/brand_controller.dart';
 
 class StoreScreen extends StatelessWidget {
   const StoreScreen({super.key});
@@ -18,6 +19,7 @@ class StoreScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final controller = CategoryController.instance;
+    final brandController = Get.put(BrandController());
     return DefaultTabController(
       length: controller.featuredCategories.length,
       child: Scaffold(
@@ -37,17 +39,37 @@ class StoreScreen extends StatelessWidget {
                         padding: const EdgeInsets.all(USizes.defaultSpace),
                         child: Column(
                           children: [
-                            USectionHeading(title: 'Brands', onPressed: ()=>Get.to(()=>BrandScreen())),
+                            USectionHeading(
+                              title: 'Brands',
+                              onPressed: () => Get.to(() => BrandScreen()),
+                            ),
                             SizedBox(
                               height: USizes.brandCardHeight,
-                              child: ListView.separated(
-                                separatorBuilder: (context, index) =>
-                                    SizedBox(width: USizes.spaceBtwItems),
-                                itemCount: 10,
-                                scrollDirection: Axis.horizontal,
-                                shrinkWrap: true,
-                                itemBuilder: (context, index) => SizedBox(width: USizes.brandCardWidth,child: UBrandCard()),
-                              ),
+                              child: Obx(() {
+                                if(brandController.isLoading.value){
+                                  return UBrandsShimmer();
+                                }
+                                if(brandController.featuredBrands.isEmpty){
+                                  return Center(child: Text('No Brands Found'),);
+                                }
+                                return ListView.separated(
+                                  separatorBuilder: (context, index) =>
+                                      SizedBox(width: USizes.spaceBtwItems),
+                                  itemCount:
+                                      brandController.featuredBrands.length,
+                                  scrollDirection: Axis.horizontal,
+                                  shrinkWrap: true,
+                                  itemBuilder: (context, index) {
+                                    final brand =
+                                        brandController.featuredBrands[index];
+
+                                    return SizedBox(
+                                      width: USizes.brandCardWidth,
+                                      child: UBrandCard(brand: brand),
+                                    );
+                                  },
+                                );
+                              }),
                             ),
                           ],
                         ),
@@ -56,13 +78,17 @@ class StoreScreen extends StatelessWidget {
                   ),
                 ),
                 bottom: UTabBar(
-                  tabs: controller.featuredCategories.map((e) => Tab(child: Text(e.name))).toList(),
+                  tabs: controller.featuredCategories
+                      .map((e) => Tab(child: Text(e.name)))
+                      .toList(),
                 ),
               ),
             ];
           },
           body: TabBarView(
-            children: controller.featuredCategories.map((e) => UCategoryTab()).toList(),
+            children: controller.featuredCategories
+                .map((e) => UCategoryTab())
+                .toList(),
           ),
         ),
       ),

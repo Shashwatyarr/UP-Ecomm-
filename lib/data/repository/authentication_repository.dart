@@ -18,6 +18,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 
 import '../../utils/exceptions/firebase_exceptions.dart';
 import '../../utils/exceptions/format_exceptions.dart';
+import 'brands/brand_repository.dart';
 
 class AuthenticationRepository extends GetxController {
   static AuthenticationRepository get instance => Get.find();
@@ -29,6 +30,7 @@ class AuthenticationRepository extends GetxController {
     FlutterNativeSplash.remove();
     screenRedirect();
     //Get.put(BannerRepository()).uploadBanners(UDummyData.banner);
+    //Get.put(BrandRepository()).uploadBrand(UDummyData.brands);
   }
 
   void screenRedirect() {

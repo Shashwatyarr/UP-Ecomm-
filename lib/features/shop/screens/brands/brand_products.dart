@@ -6,6 +6,7 @@ import 'package:ecomm/utils/constants/sizes.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../common/widgets/products/sortable_products.dart';
+import '../../models/brand_model.dart';
 
 class BrandProductsScreen extends StatelessWidget {
   const BrandProductsScreen({super.key});
@@ -21,7 +22,7 @@ class BrandProductsScreen extends StatelessWidget {
         child: Padding(padding: UPadding.screenPadding,
         child: Column(
           children: [
-            UBrandCard(),
+            UBrandCard(brand: BrandModel.empty(),),
             SizedBox(height: USizes.spaceBtwSections,),
             USortableProducts(),
           ],
