@@ -21,19 +21,25 @@ class ProductRepository extends GetxController {
 
   Future<void> uploadProduct(List<ProductModel> products) async {
     try {
+      int count = 1;
       for (ProductModel product in products) {
+        print('Uploading Product $count of ${products.length}: ${product.title}...');
+        final Map<String, String> uploadedImageMap = {};
+        
         // --- Handle Thumbnail ---
-        // If it's already a URL, keep it. Otherwise, upload.
-        if (!product.thumbnail.startsWith('http')) {
-          File thumbnailFile = await UHelperFunctions.assetToFile(
-            product.thumbnail,
-          );
-          dio.Response response = await _cloudinaryServices.uploadImage(
-            thumbnailFile,
-            UKeys.productFolder,
-          );
-          if (response.statusCode == 200) {
-            product.thumbnail = response.data['url'];
+        if (product.thumbnail.startsWith('http')) {
+          uploadedImageMap[product.thumbnail] = product.thumbnail;
+        } else {
+          try {
+            File thumbnailFile = await UHelperFunctions.assetToFile(product.thumbnail);
+            dio.Response response = await _cloudinaryServices.uploadImage(thumbnailFile, UKeys.productFolder);
+            if (response.statusCode == 200) {
+              String url = response.data['url'];
+              uploadedImageMap[product.thumbnail] = url;
+              product.thumbnail = url;
+            }
+          } catch (e) {
+            print('Error uploading thumbnail for ${product.title}: $e');
           }
         }
 
@@ -43,32 +49,33 @@ class ProductRepository extends GetxController {
 
           for (String image in product.images!) {
             if (image.startsWith('http')) {
+              uploadedImageMap[image] = image;
               updatedImageUrls.add(image);
             } else {
-              File imageFile = await UHelperFunctions.assetToFile(image);
-              dio.Response response = await _cloudinaryServices.uploadImage(
-                imageFile,
-                UKeys.productFolder,
-              );
-              if (response.statusCode == 200) {
-                updatedImageUrls.add(response.data['url']);
+              try {
+                File imageFile = await UHelperFunctions.assetToFile(image);
+                dio.Response response = await _cloudinaryServices.uploadImage(imageFile, UKeys.productFolder);
+                if (response.statusCode == 200) {
+                  String url = response.data['url'];
+                  uploadedImageMap[image] = url;
+                  updatedImageUrls.add(url);
+                } else {
+                  updatedImageUrls.add(image); // Fallback to asset path to keep list aligned
+                }
+              } catch (e) {
+                print('Error uploading image $image: $e');
+                updatedImageUrls.add(image);
               }
             }
           }
 
           // --- Update Variations ---
-          // Map variation images only if we have new URLs and variations exist
-          if (product.productVariations != null &&
-              product.productVariations!.isNotEmpty) {
+          if (product.productVariations != null && product.productVariations!.isNotEmpty) {
             for (final variation in product.productVariations!) {
-              // Only update if variation image is an asset path (not a URL)
-              if (variation.image.isNotEmpty &&
-                  !variation.image.startsWith('http')) {
-                int index = product.images!.indexWhere(
-                  (element) => element == variation.image,
-                );
-                if (index != -1 && index < updatedImageUrls.length) {
-                  variation.image = updatedImageUrls[index];
+              if (variation.image.isNotEmpty) {
+                final match = uploadedImageMap[variation.image];
+                if (match != null) {
+                  variation.image = match;
                 }
               }
             }
@@ -83,8 +90,11 @@ class ProductRepository extends GetxController {
             .collection(UKeys.productsCollection)
             .doc(product.id)
             .set(product.toJson());
-        print('Product ${product.title} uploaded successfully');
+            
+        print('SUCCESS: Product ${product.title} uploaded.');
+        count++;
       }
+      print('ALL PRODUCTS UPLOADED SUCCESSFULLY');
     } on FirebaseException catch (e) {
       throw UFirebaseException(e.code).message;
     } on FormatException catch (_) {
@@ -92,27 +102,33 @@ class ProductRepository extends GetxController {
     } on PlatformException catch (e) {
       throw UPlatformException(e.code).message;
     } catch (e) {
-      throw 'Error uploading products: $e';
+      throw 'Error during product upload: $e';
     }
   }
 
   Future<List<ProductModel>> fetchfeaturedProducts() async {
-    try{
-      final query =await _db.collection(UKeys.productsCollection).where('IsFeatured',isEqualTo: true).limit(4).get();
+    try {
+      final query = await _db
+          .collection(UKeys.productsCollection)
+          .where('IsFeatured', isEqualTo: true)
+          .limit(4)
+          .get();
 
-      if(query.docs.isNotEmpty){
-       List<ProductModel> products=query.docs.map((document)=> ProductModel.fromSnapshot(document)).toList();
-       return products;
+      if (query.docs.isNotEmpty) {
+        List<ProductModel> products = query.docs
+            .map((document) => ProductModel.fromSnapshot(document))
+            .toList();
+        return products;
       }
       return [];
-    }on FirebaseException catch (e) {
+    } on FirebaseException catch (e) {
       throw UFirebaseException(e.code).message;
     } on FormatException catch (_) {
       throw UFormatException();
     } on PlatformException catch (e) {
       throw UPlatformException(e.code).message;
     } catch (e) {
-      throw 'Error uploading products: $e';
+      throw 'Error fetching products: $e';
     }
   }
 }
