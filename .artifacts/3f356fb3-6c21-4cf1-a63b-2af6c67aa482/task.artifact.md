@@ -1,4 +1,0 @@
-- [x] Fix Firestore field name in `ProductRepository.fetchfeaturedProducts`
-- [x] Fix assignment logic in `ProductController.getFeaturedProducts`
-- [x] Ensure `ProductCardVertical` uses dynamic product data
-- [x] Verify products are showing on the Home screen
