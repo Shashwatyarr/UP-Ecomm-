@@ -1,3 +1,4 @@
+import 'package:ecomm/features/shop/models/product_model.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../common/widgets/layouts/grid_layout.dart';
@@ -39,7 +40,7 @@ class UCategoryTab extends StatelessWidget {
               UGridLayout(
                 itemCount: 4,
                 itemBuilder: (context, index) {
-                  return UProductCardVertical();
+                  return UProductCardVertical(product: ProductModel.empty(),);
                 },
               ),
               SizedBox(height: USizes.spaceBtwSections,),

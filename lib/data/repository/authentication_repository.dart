@@ -1,5 +1,6 @@
 import 'package:ecomm/data/repository/banner/banner_repository.dart';
 import 'package:ecomm/data/repository/category/category_repository.dart';
+import 'package:ecomm/data/repository/product/product_repository.dart';
 import 'package:ecomm/data/repository/user/user_repository.dart';
 import 'package:ecomm/dummy_data.dart';
 import 'package:ecomm/features/authentication/screens/login/login.dart';
@@ -29,8 +30,15 @@ class AuthenticationRepository extends GetxController {
   void onReady() {
     FlutterNativeSplash.remove();
     screenRedirect();
-    //Get.put(BannerRepository()).uploadBanners(UDummyData.banner);
-    //Get.put(BrandRepository()).uploadBrand(UDummyData.brands);
+    
+    // Attempt dummy data upload safely
+    try {
+      //Get.put(BannerRepository()).uploadBanners(UDummyData.banner);
+      //Get.put(BrandRepository()).uploadBrand(UDummyData.brands);
+      //Get.put(ProductRepository()).uploadProduct(UDummyData.products);
+    } catch (e) {
+      print('Warning: Failed to upload dummy products: $e');
+    }
   }
 
   void screenRedirect() {

@@ -13,6 +13,8 @@ import '../../../../common/widgets/layouts/grid_layout.dart';
 import '../../../../common/widgets/products/product_cards/product_card_vertical.dart';
 import '../../../../common/widgets/textfields/search_bar.dart';
 import '../../../../common/widgets/texts/section_heading.dart';
+import '../../controllers/product/product_controller.dart';
+import '../../models/product_model.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -20,6 +22,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(HomeController());
+    final productController=Get.put(ProductController());
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -52,11 +55,22 @@ class HomeScreen extends StatelessWidget {
                   const SizedBox(height: USizes.spaceBtwSections),
                   USectionHeading(title: 'Popular Products', onPressed: ()=>Get.to(()=>AllProductsScreen())),
                   SizedBox(height: USizes.spaceBtwItems),
-                  UGridLayout(
-                    itemCount: 6,
-                    itemBuilder: (context, index) {
-                      return UProductCardVertical();
-                    },
+                  Obx(
+                    () {
+                      if(productController.isLoading.value){
+                        return Center(child: CircularProgressIndicator());
+                      }
+                      if(productController.featuredProducts.isEmpty){
+                        return Center(child: Text('No Featured Products'));
+                      }
+                        return UGridLayout(
+                          itemCount: productController.featuredProducts.length,
+                          itemBuilder: (context, index) {
+                            ProductModel product = productController.featuredProducts[index];
+                            return UProductCardVertical(product: product,);
+                          },
+                        );
+                      }
                   ),
                 ],
               ),

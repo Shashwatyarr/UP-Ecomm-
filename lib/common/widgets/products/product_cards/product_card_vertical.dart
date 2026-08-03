@@ -1,6 +1,7 @@
 import 'package:ecomm/common/custom_shapes/rounded_container.dart';
 import 'package:ecomm/common/widgets/icon/circular_icon.dart';
 import 'package:ecomm/common/widgets/images/rounded_image.dart';
+import 'package:ecomm/features/shop/models/product_model.dart';
 import 'package:ecomm/features/shop/screens/product_details/product_details.dart';
 import 'package:ecomm/utils/constants/colors.dart';
 import 'package:ecomm/utils/constants/images.dart';
@@ -9,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 
+import '../../../../features/shop/controllers/product/product_controller.dart';
 import '../../../../utils/constants/sizes.dart';
 import '../../../styles/shadows.dart';
 import '../../texts/brand_title_with_verify_icon.dart';
@@ -16,11 +18,13 @@ import '../../texts/product_price_text.dart';
 import '../../texts/product_title_text.dart';
 
 class UProductCardVertical extends StatelessWidget {
-  const UProductCardVertical({super.key});
-
+  const UProductCardVertical({super.key, required this.product});
+  final ProductModel product;
   @override
   Widget build(BuildContext context) {
     final dark = UHelperFunctions.isDarkMode(context);
+    final productController=ProductController.instance;
+    String? salePercentage=productController.caculateSalePercentage(product.price, product.salePrice);
     return GestureDetector(
       onTap: ()=>Get.to(()=>ProductDetailsScreen()),
       child: Container(
@@ -40,7 +44,8 @@ class UProductCardVertical extends StatelessWidget {
               backgroundColor: dark ? UColors.dark : UColors.light,
               child: Stack(
                 children: [
-                  Center(child: URoundedImage(imageUrl: UImages.productImage15)),
+                  Center(child: URoundedImage(imageUrl: product.thumbnail,isNetworkImage: true)),
+                  if(salePercentage!=null)
                   Positioned(
                     top: 12.0,
                     child: URoundedContainer(
@@ -79,9 +84,9 @@ class UProductCardVertical extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                UProductTitleText(title: 'Blue Bata Shoes', smallSize: true,),
+                UProductTitleText(title: product.title, smallSize: true,),
               SizedBox(height: USizes.spaceBtwItems / 2,),
-              UBrandTitleWithVerifyIcon(title: 'Bata'),
+              UBrandTitleWithVerifyIcon(title: product.brand!.name),
               ]
               ),
             ),
@@ -91,7 +96,7 @@ class UProductCardVertical extends StatelessWidget {
               children: [
                 Padding(
                   padding: const EdgeInsets.only(left: USizes.sm),
-                  child: UProductPriceText(price: '65',),
+                  child: UProductPriceText(price: productController.getProductprice(product),),
                 ),
                 Container(
                   width: USizes.iconLg * 1.2,

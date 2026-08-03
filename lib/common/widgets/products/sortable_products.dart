@@ -1,4 +1,5 @@
 import 'package:ecomm/common/widgets/products/product_cards/product_card_vertical.dart';
+import 'package:ecomm/features/shop/models/product_model.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 
@@ -27,7 +28,7 @@ class USortableProducts extends StatelessWidget {
           decoration: InputDecoration(prefixIcon: Icon(Iconsax.sort)),
         ),
         SizedBox(height: USizes.spaceBtwSections,),
-        UGridLayout(itemCount: 10, itemBuilder:(context, index) => UProductCardVertical(),)
+        UGridLayout(itemCount: 10, itemBuilder:(context, index) => UProductCardVertical(product: ProductModel.empty(),),)
       ],
     );
   }
