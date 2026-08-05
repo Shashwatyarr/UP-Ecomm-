@@ -23,16 +23,23 @@ class ProductRepository extends GetxController {
     try {
       int count = 1;
       for (ProductModel product in products) {
-        print('Uploading Product $count of ${products.length}: ${product.title}...');
+        print(
+          'Uploading Product $count of ${products.length}: ${product.title}...',
+        );
         final Map<String, String> uploadedImageMap = {};
-        
+
         // --- Handle Thumbnail ---
         if (product.thumbnail.startsWith('http')) {
           uploadedImageMap[product.thumbnail] = product.thumbnail;
         } else {
           try {
-            File thumbnailFile = await UHelperFunctions.assetToFile(product.thumbnail);
-            dio.Response response = await _cloudinaryServices.uploadImage(thumbnailFile, UKeys.productFolder);
+            File thumbnailFile = await UHelperFunctions.assetToFile(
+              product.thumbnail,
+            );
+            dio.Response response = await _cloudinaryServices.uploadImage(
+              thumbnailFile,
+              UKeys.productFolder,
+            );
             if (response.statusCode == 200) {
               String url = response.data['url'];
               uploadedImageMap[product.thumbnail] = url;
@@ -54,13 +61,18 @@ class ProductRepository extends GetxController {
             } else {
               try {
                 File imageFile = await UHelperFunctions.assetToFile(image);
-                dio.Response response = await _cloudinaryServices.uploadImage(imageFile, UKeys.productFolder);
+                dio.Response response = await _cloudinaryServices.uploadImage(
+                  imageFile,
+                  UKeys.productFolder,
+                );
                 if (response.statusCode == 200) {
                   String url = response.data['url'];
                   uploadedImageMap[image] = url;
                   updatedImageUrls.add(url);
                 } else {
-                  updatedImageUrls.add(image); // Fallback to asset path to keep list aligned
+                  updatedImageUrls.add(
+                    image,
+                  ); // Fallback to asset path to keep list aligned
                 }
               } catch (e) {
                 print('Error uploading image $image: $e');
@@ -70,7 +82,8 @@ class ProductRepository extends GetxController {
           }
 
           // --- Update Variations ---
-          if (product.productVariations != null && product.productVariations!.isNotEmpty) {
+          if (product.productVariations != null &&
+              product.productVariations!.isNotEmpty) {
             for (final variation in product.productVariations!) {
               if (variation.image.isNotEmpty) {
                 final match = uploadedImageMap[variation.image];
@@ -90,7 +103,7 @@ class ProductRepository extends GetxController {
             .collection(UKeys.productsCollection)
             .doc(product.id)
             .set(product.toJson());
-            
+
         print('SUCCESS: Product ${product.title} uploaded.');
         count++;
       }
@@ -164,6 +177,40 @@ class ProductRepository extends GetxController {
       if (queryS.docs.isNotEmpty) {
         List<ProductModel> products = queryS.docs
             .map((document) => ProductModel.fromQuerySnapshot(document))
+            .toList();
+        return products;
+      }
+      return [];
+    } on FirebaseException catch (e) {
+      throw UFirebaseException(e.code).message;
+    } on FormatException catch (_) {
+      throw UFormatException();
+    } on PlatformException catch (e) {
+      throw UPlatformException(e.code).message;
+    } catch (e) {
+      throw 'Error fetching products: $e';
+    }
+  }
+
+  Future<List<ProductModel>> getProductsForBrand({
+    required String brandId,
+    int limit = -1,
+  }) async {
+    try {
+      final query = limit == -1
+          ? await _db
+                .collection(UKeys.productsCollection)
+                .where('Brand.Id', isEqualTo: brandId)
+                .get()
+          : await _db
+                .collection(UKeys.productsCollection)
+                .where('Brand.Id', isEqualTo: brandId)
+                .limit(limit)
+                .get();
+
+      if (query.docs.isNotEmpty) {
+        List<ProductModel> products = query.docs
+            .map((document) => ProductModel.fromSnapshot(document))
             .toList();
         return products;
       }

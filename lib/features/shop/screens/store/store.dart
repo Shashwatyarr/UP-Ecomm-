@@ -12,6 +12,7 @@ import '../../../../common/widgets/appbar/tabbar.dart';
 import '../../../../common/widgets/brands/brand_cart.dart';
 import '../../../../utils/constants/sizes.dart';
 import '../../controllers/brand/brand_controller.dart';
+import '../brands/brand_products.dart';
 
 class StoreScreen extends StatelessWidget {
   const StoreScreen({super.key});
@@ -65,7 +66,7 @@ class StoreScreen extends StatelessWidget {
 
                                     return SizedBox(
                                       width: USizes.brandCardWidth,
-                                      child: UBrandCard(brand: brand),
+                                      child: UBrandCard(brand: brand,onTap: () => Get.to(() => BrandProductsScreen(title: brand.name,brand: brand,)),),
                                     );
                                   },
                                 );

@@ -7,11 +7,13 @@ import 'package:ecomm/utils/popups/snackbar_helpers.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import '../../../../data/repository/brands/brand_repository.dart';
+import '../../../../data/repository/product/product_repository.dart';
 import '../../../../utils/exceptions/firebase_exceptions.dart';
 import '../../../../utils/exceptions/format_exceptions.dart';
 import '../../../../utils/exceptions/platform_exceptions.dart';
 import '../../../../utils/helpers/helper_functions.dart';
 import '../../models/brand_model.dart';
+import '../../models/product_model.dart';
 
 class BrandController extends GetxController{
   static BrandController get instance => Get.find();
@@ -63,14 +65,14 @@ class BrandController extends GetxController{
   // }
 
   // /// Get Brand specific products from your data source
-  // Future<List<ProductModel>> getBrandProducts({required String brandId, int limit = -1}) async{
-  //   try{
-  //     final products = await ProductRepository.instance.getProductsForBrand(brandId: brandId,limit: limit);
-  //     return products;
-  //   }catch(e){
-  //     HkHelperFunctions.errorSnackBar(title: 'Oh Snap!', message: e.toString());
-  //     return [];
-  //   }
-  // }
+  Future<List<ProductModel>> getBrandProducts({required String brandId, int limit = -1}) async{
+    try{
+      final products = await ProductRepository.instance.getProductsForBrand(brandId: brandId, limit: limit);
+      return products;
+    }catch(e){
+      USnackBarHelpers.errorSnackBar(title: 'Oh Snap!', message: e.toString());
+      return [];
+    }
+  }
 
 }

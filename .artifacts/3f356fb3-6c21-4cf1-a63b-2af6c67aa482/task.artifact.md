@@ -1,0 +1,3 @@
+- [x] Fix Firestore field name in `ProductRepository.getProductsForBrand`
+- [x] Pass `limit` parameter in `BrandController.getBrandProducts`
+- [x] Verify brand products are showing in the app
