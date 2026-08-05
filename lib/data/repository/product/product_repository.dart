@@ -131,4 +131,51 @@ class ProductRepository extends GetxController {
       throw 'Error fetching products: $e';
     }
   }
+
+  Future<List<ProductModel>> fetchAllFeaturedProducts() async {
+    try {
+      final query = await _db
+          .collection(UKeys.productsCollection)
+          .where('IsFeatured', isEqualTo: true)
+          .get();
+
+      if (query.docs.isNotEmpty) {
+        List<ProductModel> products = query.docs
+            .map((document) => ProductModel.fromSnapshot(document))
+            .toList();
+        return products;
+      }
+      return [];
+    } on FirebaseException catch (e) {
+      throw UFirebaseException(e.code).message;
+    } on FormatException catch (_) {
+      throw UFormatException();
+    } on PlatformException catch (e) {
+      throw UPlatformException(e.code).message;
+    } catch (e) {
+      throw 'Error fetching products: $e';
+    }
+  }
+
+  Future<List<ProductModel>> fetchProductsByQuery(Query query) async {
+    try {
+      final queryS = await query.get();
+
+      if (queryS.docs.isNotEmpty) {
+        List<ProductModel> products = queryS.docs
+            .map((document) => ProductModel.fromQuerySnapshot(document))
+            .toList();
+        return products;
+      }
+      return [];
+    } on FirebaseException catch (e) {
+      throw UFirebaseException(e.code).message;
+    } on FormatException catch (_) {
+      throw UFormatException();
+    } on PlatformException catch (e) {
+      throw UPlatformException(e.code).message;
+    } catch (e) {
+      throw 'Error fetching products: $e';
+    }
+  }
 }

@@ -53,7 +53,10 @@ class HomeScreen extends StatelessWidget {
                 children: [
                   UPromoSlider(),
                   const SizedBox(height: USizes.spaceBtwSections),
-                  USectionHeading(title: 'Popular Products', onPressed: ()=>Get.to(()=>AllProductsScreen())),
+                  USectionHeading(title: 'Popular Products', onPressed: ()=>Get.to(()=>AllProductsScreen(
+                    title: 'Popular Products',
+                    futureMethod: productController.getAllFeaturedProducts(),
+                  ))),
                   SizedBox(height: USizes.spaceBtwItems),
                   Obx(
                     () {

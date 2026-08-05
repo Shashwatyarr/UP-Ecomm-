@@ -31,6 +31,16 @@ class ProductController extends GetxController {
     }
   }
 
+  Future<List<ProductModel>> getAllFeaturedProducts() async {
+    try {
+      List<ProductModel> products = await _repository.fetchAllFeaturedProducts();
+      return products;
+    } catch (e) {
+      USnackBarHelpers.errorSnackBar(title: 'Failed', message: e.toString());
+      return [];
+    }
+  }
+
   String? caculateSalePercentage(double originalPrice, double? salePrice) {
     if (salePrice == null || salePrice <= 0) {
       return null;
