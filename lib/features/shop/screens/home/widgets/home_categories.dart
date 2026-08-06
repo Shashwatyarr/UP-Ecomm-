@@ -1,7 +1,6 @@
 import 'package:ecomm/common/widgets/shimmer/category_shimmer.dart';
 import 'package:ecomm/features/shop/models/category_model.dart';
 import 'package:ecomm/features/shop/screens/subcategory/subcategory.dart';
-import 'package:ecomm/utils/constants/images.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../../../common/widgets/image_text/vertical_image_text.dart';

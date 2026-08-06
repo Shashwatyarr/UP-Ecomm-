@@ -8,7 +8,6 @@ import '../../../../../common/widgets/appbar/appbar.dart';
 import '../../../../../common/widgets/icon/circular_icon.dart';
 import '../../../../../common/widgets/images/rounded_image.dart';
 import '../../../../../utils/constants/colors.dart';
-import '../../../../../utils/constants/images.dart';
 import '../../../../../utils/constants/sizes.dart';
 import '../../../../../utils/helpers/helper_functions.dart';
 import '../../../controllers/product/image_controller.dart';

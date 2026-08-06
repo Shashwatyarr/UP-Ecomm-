@@ -36,7 +36,7 @@ class BannerRepository extends GetxController {
       }
     } on FirebaseException catch (e) {
       throw UFirebaseException(e.code).message;
-    } on FormatException catch (e) {
+    } on FormatException catch (_) {
       throw UFormatException();
     } on PlatformException catch (e) {
       throw UPlatformException(e.code).message;
@@ -46,22 +46,21 @@ class BannerRepository extends GetxController {
   }
 
   Future<List<BannerModel>> fetchActiveBanner() async {
-    try{
-      final query=await _db.collection(UKeys.bannerCollection).where('Active',isEqualTo: true).get();
-      if(query.docs.isNotEmpty){
-        List<BannerModel> banners=query.docs.map((e) => BannerModel.fromDocument(e)).toList();
+    try {
+      final query = await _db.collection(UKeys.bannerCollection).where('Active', isEqualTo: true).get();
+      if (query.docs.isNotEmpty) {
+        List<BannerModel> banners = query.docs.map((e) => BannerModel.fromDocument(e)).toList();
         return banners;
       }
       return [];
     } on FirebaseException catch (e) {
       throw UFirebaseException(e.code).message;
-    } on FormatException catch (e) {
+    } on FormatException catch (_) {
       throw UFormatException();
     } on PlatformException catch (e) {
       throw UPlatformException(e.code).message;
     } catch (e) {
       throw 'Something went wrong. Please try again later';
     }
-
   }
 }

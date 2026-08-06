@@ -225,4 +225,23 @@ class ProductRepository extends GetxController {
       throw 'Error fetching products: $e';
     }
   }
+
+  Future<List<ProductModel>> getProductsForCategory({required String categoryId, int limit = 4}) async {
+    try {
+      final query = limit == -1
+          ? await _db.collection(UKeys.productCategoryCollection).where('CategoryId', isEqualTo: categoryId).get()
+          : await _db.collection(UKeys.productCategoryCollection).where('CategoryId', isEqualTo: categoryId).limit(limit).get();
+
+      final productsIds = query.docs.map((doc) => doc['ProductId'] as String).toList();
+      final productsQuery = await _db.collection(UKeys.productsCollection).where(FieldPath.documentId, whereIn: productsIds).get();
+      final products = productsQuery.docs.map((doc) => ProductModel.fromSnapshot(doc)).toList();
+      return products;
+    } on FirebaseException catch (e) {
+      throw UFirebaseException(e.code).message;
+    } on PlatformException catch (e) {
+      throw UPlatformException(e.code).message;
+    } catch (e) {
+      throw 'Error fetching products: $e';
+    }
+  }
 }

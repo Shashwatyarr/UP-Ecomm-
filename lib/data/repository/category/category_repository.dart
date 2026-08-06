@@ -3,13 +3,13 @@ import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dio/dio.dart' as dio;
 import 'package:ecomm/utils/helpers/helper_functions.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
+import '../../../features/shop/models/brand_category_model.dart';
 import '../../../features/shop/models/category_model.dart';
+import '../../../features/shop/models/product_category_model.dart';
 import '../../../utils/constants/keys.dart';
-import '../../../utils/exceptions/firebase_auth_exceptions.dart';
 import '../../../utils/exceptions/firebase_exceptions.dart';
 import '../../../utils/exceptions/format_exceptions.dart';
 import '../../../utils/exceptions/platform_exceptions.dart';
@@ -74,4 +74,40 @@ class CategoryRepository extends GetxController {
       throw 'Error uploading categories: $e';
     }
   }
+
+  Future<void> uploadBrandCategory(List<BrandCategoryModel> brandCategories) async{
+    try{
+      for(final brandCategory in brandCategories) {
+        await _db.collection(UKeys.brandCategoryCollection).doc().set(brandCategory.toJson());
+      }
+      print('uploaded brand categories');
+    }on FirebaseException catch (e) {
+      throw UFirebaseException(e.code).message;
+    } on FormatException catch (_) {
+      throw UFormatException();
+    } on PlatformException catch (e) {
+      throw UPlatformException(e.code).message;
+    } catch (e) {
+      throw 'Error uploading categories: $e';
+    }
+
+  }
+  Future<void> uploadProductCategory(List<ProductCategoryModel> productCategories) async{
+    try{
+      for(final productCategory in productCategories) {
+        await _db.collection(UKeys.productCategoryCollection).doc().set(productCategory.toJson());
+      }
+      print('uploaded product categories');
+    }on FirebaseException catch (e) {
+      throw UFirebaseException(e.code).message;
+    } on FormatException catch (_) {
+      throw UFormatException();
+    } on PlatformException catch (e) {
+      throw UPlatformException(e.code).message;
+    } catch (e) {
+      throw 'Error uploading categories: $e';
+    }
+
+  }
+
 }

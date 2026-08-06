@@ -11,8 +11,6 @@ import 'package:image_picker/image_picker.dart';
 
 import '../../../data/repository/authentication_repository.dart';
 import '../../../data/repository/user/user_repository.dart';
-import '../../../utils/constants/apis.dart';
-import '../../../utils/constants/keys.dart';
 import '../../../utils/helpers/network_manager.dart';
 import '../../../utils/popups/full_screen_loader.dart';
 import '../../../utils/popups/snackbar_helpers.dart';

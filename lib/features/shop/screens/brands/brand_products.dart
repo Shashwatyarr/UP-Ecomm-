@@ -3,7 +3,6 @@ import 'package:ecomm/common/widgets/appbar/appbar.dart';
 import 'package:ecomm/common/widgets/brands/brand_cart.dart';
 import 'package:ecomm/common/widgets/shimmer/vertical_product_shimmer.dart';
 import 'package:ecomm/features/shop/controllers/brand/brand_controller.dart';
-import 'package:ecomm/features/shop/screens/all_products/all_products.dart';
 import 'package:ecomm/utils/constants/sizes.dart';
 import 'package:ecomm/utils/helpers/cloud_helper_functions.dart';
 import 'package:flutter/material.dart';

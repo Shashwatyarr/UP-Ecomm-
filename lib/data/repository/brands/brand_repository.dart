@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dio/dio.dart' as dio;
+import 'package:ecomm/features/shop/models/brand_category_model.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
@@ -46,7 +47,7 @@ class BrandRepository extends GetxController {
     } on PlatformException catch (e) {
       throw UPlatformException(e.code).message;
     } catch (e) {
-      throw 'Error uploading brands: $e';
+      throw 'Error uploading brand: $e';
     }
   }
 
@@ -65,7 +66,33 @@ class BrandRepository extends GetxController {
     } on PlatformException catch (e) {
       throw UPlatformException(e.code).message;
     } catch (e) {
-      throw 'Error uploading brands: $e';
+      throw 'Error fetching brands: $e';
+    }
+  }
+
+  Future<List<BrandModel>> fetchBrandsForCategory(String categoryId) async {
+    try {
+      final brandCategoryQuery = await _db.collection(UKeys.brandCategoryCollection).where('CategoryId', isEqualTo: categoryId).get();
+
+      List<BrandCategoryModel> brandCategories = brandCategoryQuery.docs.map((doc) => BrandCategoryModel.fromSnapshot(doc)).toList();
+
+      List<String> brandIds = brandCategories.map((category) => category.brandId).toList();
+
+      if (brandIds.isEmpty) return [];
+
+      final brandsQuery = await _db.collection(UKeys.brandsCollection).where(FieldPath.documentId, whereIn: brandIds).limit(2).get();
+
+      final brands = brandsQuery.docs.map((doc) => BrandModel.fromSnapshot(doc)).toList();
+
+      return brands;
+    } on FirebaseException catch (e) {
+      throw UFirebaseException(e.code).message;
+    } on FormatException catch (_) {
+      throw UFormatException();
+    } on PlatformException catch (e) {
+      throw UPlatformException(e.code).message;
+    } catch (e) {
+      throw 'Error fetching brands for category: $e';
     }
   }
 }

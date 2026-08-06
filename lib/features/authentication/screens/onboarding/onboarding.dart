@@ -15,7 +15,7 @@ class OnboardingScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final controller =Get.put(onBoardingController());
+    final controller =Get.put(OnBoardingController());
     return Scaffold(
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: USizes.defaultSpace),
@@ -47,7 +47,7 @@ class OnboardingSkipButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final controller = onBoardingController.instance;
+    final controller = OnBoardingController.instance;
     return Obx(()=> controller.currentIndex.value==2?SizedBox(): Positioned(
         top: UDeviceHelper.getAppBarHeight(),
           right: 0,
@@ -63,7 +63,7 @@ class OnBoardingNextButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final controller = onBoardingController.instance;
+    final controller = OnBoardingController.instance;
     return Positioned(
       left: 0,
       right: 0,
@@ -85,7 +85,7 @@ class OnboardingDotNavigation extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final controller= onBoardingController.instance;
+    final controller= OnBoardingController.instance;
     return Positioned(
       bottom: UDeviceHelper.getBottomNavigationBarHeight()*4,
         left: UDeviceHelper.getScreenWidth(context)/3,

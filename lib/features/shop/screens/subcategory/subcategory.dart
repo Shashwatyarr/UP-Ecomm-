@@ -1,16 +1,9 @@
-import 'package:ecomm/common/custom_shapes/rounded_container.dart';
 import 'package:ecomm/common/styles/padding.dart';
 import 'package:ecomm/common/widgets/appbar/appbar.dart';
-import 'package:ecomm/common/widgets/images/rounded_image.dart';
 import 'package:ecomm/common/widgets/texts/section_heading.dart';
-import 'package:ecomm/utils/constants/colors.dart';
-import 'package:ecomm/utils/constants/images.dart';
 import 'package:ecomm/utils/constants/sizes.dart';
-import 'package:ecomm/utils/helpers/helper_functions.dart';
 import 'package:flutter/material.dart';
-import 'package:iconsax/iconsax.dart';
 
-import '../../../../common/widgets/icon/circular_icon.dart';
 import '../../../../common/widgets/products/product_cards/product_card_horizontal.dart';
 
 class SubcategoryScreen extends StatelessWidget {

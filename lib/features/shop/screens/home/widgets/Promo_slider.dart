@@ -1,6 +1,5 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:ecomm/common/widgets/shimmer/shimmer_effect.dart';
-import 'package:ecomm/features/shop/controllers/home/home_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

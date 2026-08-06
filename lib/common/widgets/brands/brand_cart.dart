@@ -2,7 +2,6 @@ import 'package:ecomm/features/shop/models/brand_model.dart';
 import 'package:flutter/material.dart';
 
 import '../../../utils/constants/enums.dart';
-import '../../../utils/constants/images.dart';
 import '../../../utils/constants/sizes.dart';
 import '../../custom_shapes/rounded_container.dart';
 import '../images/rounded_image.dart';
@@ -37,7 +36,7 @@ class UBrandCard extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   UBrandTitleWithVerifyIcon(title: brand.name,brandTextSize: TextSizes.large,),
-                  Text(brand.productsCount.toString()+' Products',style: Theme.of(context).textTheme.labelMedium,overflow: TextOverflow.ellipsis,)
+                  Text('${brand.productsCount} Products',style: Theme.of(context).textTheme.labelMedium,overflow: TextOverflow.ellipsis,)
                 ],
               ),
             ),

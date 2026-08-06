@@ -2,16 +2,10 @@
 
 
 
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ecomm/utils/popups/snackbar_helpers.dart';
-import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import '../../../../data/repository/brands/brand_repository.dart';
 import '../../../../data/repository/product/product_repository.dart';
-import '../../../../utils/exceptions/firebase_exceptions.dart';
-import '../../../../utils/exceptions/format_exceptions.dart';
-import '../../../../utils/exceptions/platform_exceptions.dart';
-import '../../../../utils/helpers/helper_functions.dart';
 import '../../models/brand_model.dart';
 import '../../models/product_model.dart';
 
@@ -52,17 +46,17 @@ class BrandController extends GetxController{
   }
 
   /// Get Brands for Specific Category
-  // Future<List<BrandModel>> getBrandsForCategory(String categoryId) async{
-  //   try{
-  //
-  //     final brands = await repository.getBrandsForCategory(categoryId);
-  //     return brands;
-  //
-  //   }catch(e){
-  //     USnackBarHelpers.errorSnackBar(title: 'Oh Snap!', message: e.toString());
-  //     return [];
-  //   }
-  // }
+  Future<List<BrandModel>> getBrandsForCategory(String categoryId) async{
+    try{
+
+      final brands = await repository.fetchBrandsForCategory(categoryId);
+      return brands;
+
+    }catch(e){
+      USnackBarHelpers.errorSnackBar(title: 'Oh Snap!', message: e.toString());
+      return [];
+    }
+  }
 
   // /// Get Brand specific products from your data source
   Future<List<ProductModel>> getBrandProducts({required String brandId, int limit = -1}) async{

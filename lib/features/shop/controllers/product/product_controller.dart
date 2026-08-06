@@ -78,4 +78,14 @@ class ProductController extends GetxController {
   String getProductStockStatus(int stock){
     return stock>0?'In Stock':'Out of Stock';
   }
+
+  Future<List<ProductModel>> getCategoryProducts({required String categoryId, int limit = 4}) async {
+    try {
+      final products = await _repository.getProductsForCategory(categoryId: categoryId, limit: limit);
+      return products;
+    } catch (e) {
+      USnackBarHelpers.errorSnackBar(title: 'Failed', message: e.toString());
+      return [];
+    }
+  }
 }

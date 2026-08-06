@@ -7,7 +7,6 @@ import '../../../../../common/widgets/texts/brand_title_with_verify_icon.dart';
 import '../../../../../common/widgets/texts/product_price_text.dart';
 import '../../../../../common/widgets/texts/product_title_text.dart';
 import '../../../../../utils/constants/colors.dart';
-import '../../../../../utils/constants/images.dart';
 import '../../../../../utils/constants/sizes.dart';
 import '../../../../../utils/constants/texts.dart';
 import '../../../controllers/product/product_controller.dart';
@@ -38,7 +37,7 @@ class UProductMetaData extends StatelessWidget {
                   vertical: USizes.xs,
                 ),
                 child: Text(
-                  '${salePercentage}',
+                  salePercentage,
                   style: Theme.of(
                     context,
                   ).textTheme.labelLarge!.apply(color: Colors.black),

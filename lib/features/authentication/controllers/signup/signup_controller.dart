@@ -48,10 +48,7 @@ class SignUpController extends GetxController {
         id: userCredential.user!.uid,
         firstName: firstNameController.text.trim(),
         lastName: lastNameController.text.trim(),
-        username:
-            firstNameController.text.trim() +
-            lastNameController.text.trim() +
-            '3084567',
+        username: '${firstNameController.text.trim()}${lastNameController.text.trim()}3084567',
         email: emailController.text.trim(),
         phoneNumber: phoneNumberController.text.trim(),
         profilePicture: '',

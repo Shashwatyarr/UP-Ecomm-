@@ -1,7 +1,6 @@
 import 'package:ecomm/features/authentication/controllers/login/login_controller.dart';
 import 'package:ecomm/features/authentication/screens/forget_password/forget_password.dart';
 import 'package:ecomm/features/authentication/screens/signup/signup.dart';
-import 'package:ecomm/navigation_menu.dart';
 import 'package:ecomm/utils/validators/validation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

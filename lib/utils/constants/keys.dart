@@ -6,6 +6,8 @@ class UKeys{
   static const String bannerCollection = 'Banners';
   static const String brandsCollection = 'Brands';
   static const String productsCollection = 'Products';
+  static const String brandCategoryCollection = 'BrandCategories';
+  static const String productCategoryCollection = 'ProductCategories';
 
   static const String rememberMeEmail= 'Remember_email';
   static const String rememberMePassword= 'Remember_password';

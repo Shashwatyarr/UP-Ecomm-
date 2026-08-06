@@ -4,7 +4,6 @@ import 'package:ecomm/common/widgets/images/rounded_image.dart';
 import 'package:ecomm/features/shop/models/product_model.dart';
 import 'package:ecomm/features/shop/screens/product_details/product_details.dart';
 import 'package:ecomm/utils/constants/colors.dart';
-import 'package:ecomm/utils/constants/images.dart';
 import 'package:ecomm/utils/helpers/helper_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -86,11 +85,11 @@ class UProductCardVertical extends StatelessWidget {
                 children: [
                 UProductTitleText(title: product.title, smallSize: true,),
               SizedBox(height: USizes.spaceBtwItems / 2,),
-              UBrandTitleWithVerifyIcon(title: product.brand!.name),
+              UBrandTitleWithVerifyIcon(title: product.brand?.name ?? ''),
               ]
               ),
             ),
-            Spacer(),
+            const Spacer(),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [

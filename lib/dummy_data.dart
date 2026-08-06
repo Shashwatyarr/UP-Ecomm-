@@ -3,9 +3,11 @@ import 'package:ecomm/routes/routes.dart';
 import 'package:ecomm/utils/constants/images.dart';
 
 import 'features/shop/models/banner_model.dart';
+import 'features/shop/models/brand_category_model.dart';
 import 'features/shop/models/brand_model.dart';
 import 'features/shop/models/category_model.dart';
 import 'features/shop/models/product_attribute_model.dart';
+import 'features/shop/models/product_category_model.dart';
 import 'features/shop/models/product_model.dart';
 import 'features/shop/models/product_variation_model.dart';
 
@@ -1632,212 +1634,212 @@ class UDummyData {
     ),
   ];
   //
-  // static final List<BrandCategoryModel> brandCategory = [
-  //   BrandCategoryModel(categoryId: '1', brandId: '1'), // Clothes - Nike
-  //   BrandCategoryModel(categoryId: '1', brandId: '2'), // Clothes - Adidas
-  //   BrandCategoryModel(categoryId: '1', brandId: '6'), // Clothes - Breakout
-  //   BrandCategoryModel(categoryId: '1', brandId: '13'), // Clothes - Polo
-  //
-  //   BrandCategoryModel(categoryId: '2', brandId: '1'), // Shoes - Nike
-  //   BrandCategoryModel(categoryId: '2', brandId: '11'), // Shoes - NDURE
-  //   BrandCategoryModel(categoryId: '2', brandId: '4'), // Shoes - Bata
-  //   BrandCategoryModel(categoryId: '2', brandId: '2'), // Shoes - Adidas
-  //
-  //   BrandCategoryModel(categoryId: '3', brandId: '7'), // Cosmetics - Dari mooch
-  //   BrandCategoryModel(categoryId: '3', brandId: '10'), // Cosmetics - j.
-  //   BrandCategoryModel(categoryId: '3', brandId: '12'), // Cosmetics - North Star
-  //
-  //   BrandCategoryModel(categoryId: '4', brandId: '3'), // Electronics - Apple
-  //   BrandCategoryModel(categoryId: '4', brandId: '5'), // Electronics - Bloody
-  //   BrandCategoryModel(categoryId: '4', brandId: '9'), // Electronics - HP
-  //
-  //   BrandCategoryModel(categoryId: '5', brandId: '8'), // Furniture - InterWood
-  //
-  //   BrandCategoryModel(categoryId: '6', brandId: '1'), // Sports - Nike
-  // ];
-  //
-  // static final List<ProductCategoryModel> productCategory = [
-  //   // Clothes Category
-  //   ProductCategoryModel(categoryId: '1', productId: '1'),
-  //   ProductCategoryModel(categoryId: '1', productId: '17'),
-  //   ProductCategoryModel(categoryId: '1', productId: '18'),
-  //   ProductCategoryModel(categoryId: '1', productId: '21'),
-  //   ProductCategoryModel(categoryId: '1', productId: '67'),
-  //   ProductCategoryModel(categoryId: '1', productId: '16'),
-  //   ProductCategoryModel(categoryId: '1', productId: '25'),
-  //   ProductCategoryModel(categoryId: '1', productId: '49'),
-  //   ProductCategoryModel(categoryId: '1', productId: '56'),
-  //   ProductCategoryModel(categoryId: '1', productId: '57'),
-  //   ProductCategoryModel(categoryId: '1', productId: '66'),
-  //   ProductCategoryModel(categoryId: '1', productId: '9'),
-  //   ProductCategoryModel(categoryId: '1', productId: '11'),
-  //   ProductCategoryModel(categoryId: '1', productId: '68'),
-  //
-  //   // Shoes Category
-  //   ProductCategoryModel(categoryId: '2', productId: '14'),
-  //   ProductCategoryModel(categoryId: '2', productId: '19'),
-  //   ProductCategoryModel(categoryId: '2', productId: '10'),
-  //   ProductCategoryModel(categoryId: '2', productId: '15'),
-  //   ProductCategoryModel(categoryId: '2', productId: '20'),
-  //
-  //   // Cosmetics Category
-  //   ProductCategoryModel(categoryId: '3', productId: '28'),
-  //   ProductCategoryModel(categoryId: '3', productId: '36'),
-  //   ProductCategoryModel(categoryId: '3', productId: '27'),
-  //   ProductCategoryModel(categoryId: '3', productId: '29'),
-  //   ProductCategoryModel(categoryId: '3', productId: '30'),
-  //   ProductCategoryModel(categoryId: '3', productId: '13'),
-  //   ProductCategoryModel(categoryId: '3', productId: '24'),
-  //   ProductCategoryModel(categoryId: '3', productId: '14'),
-  //   ProductCategoryModel(categoryId: '3', productId: '45'),
-  //   ProductCategoryModel(categoryId: '3', productId: '46'),
-  //   ProductCategoryModel(categoryId: '3', productId: '48'),
-  //   ProductCategoryModel(categoryId: '3', productId: '5'),
-  //   ProductCategoryModel(categoryId: '3', productId: '6'),
-  //   ProductCategoryModel(categoryId: '3', productId: '7'),
-  //   ProductCategoryModel(categoryId: '3', productId: '8'),
-  //   ProductCategoryModel(categoryId: '3', productId: '52'),
-  //   ProductCategoryModel(categoryId: '3', productId: '53'),
-  //
-  //   // Electronics Category
-  //   ProductCategoryModel(categoryId: '4', productId: '31'),
-  //   ProductCategoryModel(categoryId: '4', productId: '37'),
-  //   ProductCategoryModel(categoryId: '4', productId: '40'),
-  //   ProductCategoryModel(categoryId: '4', productId: '41'),
-  //   ProductCategoryModel(categoryId: '4', productId: '42'),
-  //   ProductCategoryModel(categoryId: '4', productId: '43'),
-  //   ProductCategoryModel(categoryId: '4', productId: '44'),
-  //   ProductCategoryModel(categoryId: '4', productId: '54'),
-  //   ProductCategoryModel(categoryId: '4', productId: '55'),
-  //   ProductCategoryModel(categoryId: '4', productId: '64'),
-  //   ProductCategoryModel(categoryId: '4', productId: '22'),
-  //   ProductCategoryModel(categoryId: '4', productId: '23'),
-  //   ProductCategoryModel(categoryId: '4', productId: '38'),
-  //   ProductCategoryModel(categoryId: '4', productId: '39'),
-  //   ProductCategoryModel(categoryId: '4', productId: '3'),
-  //   ProductCategoryModel(categoryId: '4', productId: '4'),
-  //   ProductCategoryModel(categoryId: '4', productId: '32'),
-  //   ProductCategoryModel(categoryId: '4', productId: '33'),
-  //   ProductCategoryModel(categoryId: '4', productId: '34'),
-  //   ProductCategoryModel(categoryId: '4', productId: '35'),
-  //
-  //   // Furniture Category
-  //   ProductCategoryModel(categoryId: '5', productId: '50'),
-  //   ProductCategoryModel(categoryId: '5', productId: '51'),
-  //   ProductCategoryModel(categoryId: '5', productId: '58'),
-  //   ProductCategoryModel(categoryId: '5', productId: '59'),
-  //   ProductCategoryModel(categoryId: '5', productId: '60'),
-  //   ProductCategoryModel(categoryId: '5', productId: '63'),
-  //   ProductCategoryModel(categoryId: '5', productId: '65'),
-  //   ProductCategoryModel(categoryId: '5', productId: '61'),
-  //   ProductCategoryModel(categoryId: '5', productId: '62'),
-  //
-  //   // Shoes Category
-  //   ProductCategoryModel(categoryId: '6', productId: '26'),
-  //   ProductCategoryModel(categoryId: '6', productId: '2'),
-  //
-  //   // Shirts
-  //   ProductCategoryModel(categoryId: '7', productId: '1'),
-  //   ProductCategoryModel(categoryId: '7', productId: '17'),
-  //   ProductCategoryModel(categoryId: '7', productId: '18'),
-  //   ProductCategoryModel(categoryId: '7', productId: '21'),
-  //   ProductCategoryModel(categoryId: '7', productId: '67'),
-  //
-  //   // Jackets
-  //   ProductCategoryModel(categoryId: '8', productId: '16'),
-  //   ProductCategoryModel(categoryId: '8', productId: '25'),
-  //   ProductCategoryModel(categoryId: '8', productId: '49'),
-  //   ProductCategoryModel(categoryId: '8', productId: '56'),
-  //   ProductCategoryModel(categoryId: '8', productId: '57'),
-  //   ProductCategoryModel(categoryId: '8', productId: '66'),
-  //
-  //   // Shorts
-  //   ProductCategoryModel(categoryId: '9', productId: '9'),
-  //   ProductCategoryModel(categoryId: '9', productId: '11'),
-  //   ProductCategoryModel(categoryId: '9', productId: '68'),
-  //
-  //   // Formal Shoes
-  //   ProductCategoryModel(categoryId: '10', productId: '14'),
-  //   ProductCategoryModel(categoryId: '10', productId: '19'),
-  //
-  //   // Sports Shoes
-  //   ProductCategoryModel(categoryId: '11', productId: '10'),
-  //   ProductCategoryModel(categoryId: '11', productId: '15'),
-  //   ProductCategoryModel(categoryId: '11', productId: '20'),
-  //
-  //   // Face
-  //   ProductCategoryModel(categoryId: '12', productId: '28'),
-  //   ProductCategoryModel(categoryId: '12', productId: '36'),
-  //
-  //   // Hair Oils
-  //   ProductCategoryModel(categoryId: '13', productId: '27'),
-  //   ProductCategoryModel(categoryId: '13', productId: '29'),
-  //   ProductCategoryModel(categoryId: '13', productId: '30'),
-  //
-  //   // Bags
-  //   ProductCategoryModel(categoryId: '14', productId: '13'),
-  //   ProductCategoryModel(categoryId: '14', productId: '24'),
-  //   ProductCategoryModel(categoryId: '14', productId: '14'),
-  //   ProductCategoryModel(categoryId: '14', productId: '45'),
-  //   ProductCategoryModel(categoryId: '14', productId: '46'),
-  //   ProductCategoryModel(categoryId: '14', productId: '48'),
-  //
-  //   // Perfumes
-  //   ProductCategoryModel(categoryId: '15', productId: '5'),
-  //   ProductCategoryModel(categoryId: '15', productId: '6'),
-  //   ProductCategoryModel(categoryId: '15', productId: '7'),
-  //   ProductCategoryModel(categoryId: '15', productId: '8'),
-  //
-  //   // Watch
-  //   ProductCategoryModel(categoryId: '16', productId: '52'),
-  //   ProductCategoryModel(categoryId: '16', productId: '53'),
-  //
-  //   // Gadgets
-  //   ProductCategoryModel(categoryId: '17', productId: '31'),
-  //   ProductCategoryModel(categoryId: '17', productId: '37'),
-  //   ProductCategoryModel(categoryId: '17', productId: '40'),
-  //   ProductCategoryModel(categoryId: '17', productId: '41'),
-  //   ProductCategoryModel(categoryId: '17', productId: '42'),
-  //   ProductCategoryModel(categoryId: '17', productId: '43'),
-  //   ProductCategoryModel(categoryId: '17', productId: '44'),
-  //   ProductCategoryModel(categoryId: '17', productId: '54'),
-  //   ProductCategoryModel(categoryId: '17', productId: '55'),
-  //   ProductCategoryModel(categoryId: '17', productId: '64'),
-  //
-  //   // Laptops
-  //   ProductCategoryModel(categoryId: '18', productId: '22'),
-  //   ProductCategoryModel(categoryId: '18', productId: '23'),
-  //   ProductCategoryModel(categoryId: '18', productId: '38'),
-  //   ProductCategoryModel(categoryId: '18', productId: '39'),
-  //
-  //   // Mobiles
-  //   ProductCategoryModel(categoryId: '19', productId: '3'),
-  //   ProductCategoryModel(categoryId: '19', productId: '4'),
-  //   ProductCategoryModel(categoryId: '19', productId: '32'),
-  //   ProductCategoryModel(categoryId: '19', productId: '33'),
-  //   ProductCategoryModel(categoryId: '19', productId: '34'),
-  //   ProductCategoryModel(categoryId: '19', productId: '35'),
-  //
-  //   // Bed
-  //   ProductCategoryModel(categoryId: '20', productId: '50'),
-  //   ProductCategoryModel(categoryId: '20', productId: '51'),
-  //   ProductCategoryModel(categoryId: '20', productId: '58'),
-  //   ProductCategoryModel(categoryId: '20', productId: '59'),
-  //   ProductCategoryModel(categoryId: '20', productId: '60'),
-  //   ProductCategoryModel(categoryId: '20', productId: '63'),
-  //   ProductCategoryModel(categoryId: '20', productId: '65'),
-  //
-  //   // Lamp
-  //   ProductCategoryModel(categoryId: '21', productId: '61'),
-  //   ProductCategoryModel(categoryId: '21', productId: '62'),
-  //
-  //   // Cricket
-  //   ProductCategoryModel(categoryId: '22', productId: '26'),
-  //
-  //   // Soccer
-  //   ProductCategoryModel(categoryId: '23', productId: '2'),
-  // ];
-  //
+  static final List<BrandCategoryModel> brandCategory = [
+    BrandCategoryModel(categoryId: '1', brandId: '1'), // Clothes - Nike
+    BrandCategoryModel(categoryId: '1', brandId: '2'), // Clothes - Adidas
+    BrandCategoryModel(categoryId: '1', brandId: '6'), // Clothes - Breakout
+    BrandCategoryModel(categoryId: '1', brandId: '13'), // Clothes - Polo
+
+    BrandCategoryModel(categoryId: '2', brandId: '1'), // Shoes - Nike
+    BrandCategoryModel(categoryId: '2', brandId: '11'), // Shoes - NDURE
+    BrandCategoryModel(categoryId: '2', brandId: '4'), // Shoes - Bata
+    BrandCategoryModel(categoryId: '2', brandId: '2'), // Shoes - Adidas
+
+    BrandCategoryModel(categoryId: '3', brandId: '7'), // Cosmetics - Dari mooch
+    BrandCategoryModel(categoryId: '3', brandId: '10'), // Cosmetics - j.
+    BrandCategoryModel(categoryId: '3', brandId: '12'), // Cosmetics - North Star
+
+    BrandCategoryModel(categoryId: '4', brandId: '3'), // Electronics - Apple
+    BrandCategoryModel(categoryId: '4', brandId: '5'), // Electronics - Bloody
+    BrandCategoryModel(categoryId: '4', brandId: '9'), // Electronics - HP
+
+    BrandCategoryModel(categoryId: '5', brandId: '8'), // Furniture - InterWood
+
+    BrandCategoryModel(categoryId: '6', brandId: '1'), // Sports - Nike
+  ];
+
+  static final List<ProductCategoryModel> productCategory = [
+    // Clothes Category
+    ProductCategoryModel(categoryId: '1', productId: '1'),
+    ProductCategoryModel(categoryId: '1', productId: '17'),
+    ProductCategoryModel(categoryId: '1', productId: '18'),
+    ProductCategoryModel(categoryId: '1', productId: '21'),
+    ProductCategoryModel(categoryId: '1', productId: '67'),
+    ProductCategoryModel(categoryId: '1', productId: '16'),
+    ProductCategoryModel(categoryId: '1', productId: '25'),
+    ProductCategoryModel(categoryId: '1', productId: '49'),
+    ProductCategoryModel(categoryId: '1', productId: '56'),
+    ProductCategoryModel(categoryId: '1', productId: '57'),
+    ProductCategoryModel(categoryId: '1', productId: '66'),
+    ProductCategoryModel(categoryId: '1', productId: '9'),
+    ProductCategoryModel(categoryId: '1', productId: '11'),
+    ProductCategoryModel(categoryId: '1', productId: '68'),
+
+    // Shoes Category
+    ProductCategoryModel(categoryId: '2', productId: '14'),
+    ProductCategoryModel(categoryId: '2', productId: '19'),
+    ProductCategoryModel(categoryId: '2', productId: '10'),
+    ProductCategoryModel(categoryId: '2', productId: '15'),
+    ProductCategoryModel(categoryId: '2', productId: '20'),
+
+    // Cosmetics Category
+    ProductCategoryModel(categoryId: '3', productId: '28'),
+    ProductCategoryModel(categoryId: '3', productId: '36'),
+    ProductCategoryModel(categoryId: '3', productId: '27'),
+    ProductCategoryModel(categoryId: '3', productId: '29'),
+    ProductCategoryModel(categoryId: '3', productId: '30'),
+    ProductCategoryModel(categoryId: '3', productId: '13'),
+    ProductCategoryModel(categoryId: '3', productId: '24'),
+    ProductCategoryModel(categoryId: '3', productId: '14'),
+    ProductCategoryModel(categoryId: '3', productId: '45'),
+    ProductCategoryModel(categoryId: '3', productId: '46'),
+    ProductCategoryModel(categoryId: '3', productId: '48'),
+    ProductCategoryModel(categoryId: '3', productId: '5'),
+    ProductCategoryModel(categoryId: '3', productId: '6'),
+    ProductCategoryModel(categoryId: '3', productId: '7'),
+    ProductCategoryModel(categoryId: '3', productId: '8'),
+    ProductCategoryModel(categoryId: '3', productId: '52'),
+    ProductCategoryModel(categoryId: '3', productId: '53'),
+
+    // Electronics Category
+    ProductCategoryModel(categoryId: '4', productId: '31'),
+    ProductCategoryModel(categoryId: '4', productId: '37'),
+    ProductCategoryModel(categoryId: '4', productId: '40'),
+    ProductCategoryModel(categoryId: '4', productId: '41'),
+    ProductCategoryModel(categoryId: '4', productId: '42'),
+    ProductCategoryModel(categoryId: '4', productId: '43'),
+    ProductCategoryModel(categoryId: '4', productId: '44'),
+    ProductCategoryModel(categoryId: '4', productId: '54'),
+    ProductCategoryModel(categoryId: '4', productId: '55'),
+    ProductCategoryModel(categoryId: '4', productId: '64'),
+    ProductCategoryModel(categoryId: '4', productId: '22'),
+    ProductCategoryModel(categoryId: '4', productId: '23'),
+    ProductCategoryModel(categoryId: '4', productId: '38'),
+    ProductCategoryModel(categoryId: '4', productId: '39'),
+    ProductCategoryModel(categoryId: '4', productId: '3'),
+    ProductCategoryModel(categoryId: '4', productId: '4'),
+    ProductCategoryModel(categoryId: '4', productId: '32'),
+    ProductCategoryModel(categoryId: '4', productId: '33'),
+    ProductCategoryModel(categoryId: '4', productId: '34'),
+    ProductCategoryModel(categoryId: '4', productId: '35'),
+
+    // Furniture Category
+    ProductCategoryModel(categoryId: '5', productId: '50'),
+    ProductCategoryModel(categoryId: '5', productId: '51'),
+    ProductCategoryModel(categoryId: '5', productId: '58'),
+    ProductCategoryModel(categoryId: '5', productId: '59'),
+    ProductCategoryModel(categoryId: '5', productId: '60'),
+    ProductCategoryModel(categoryId: '5', productId: '63'),
+    ProductCategoryModel(categoryId: '5', productId: '65'),
+    ProductCategoryModel(categoryId: '5', productId: '61'),
+    ProductCategoryModel(categoryId: '5', productId: '62'),
+
+    // Shoes Category
+    ProductCategoryModel(categoryId: '6', productId: '26'),
+    ProductCategoryModel(categoryId: '6', productId: '2'),
+
+    // Shirts
+    ProductCategoryModel(categoryId: '7', productId: '1'),
+    ProductCategoryModel(categoryId: '7', productId: '17'),
+    ProductCategoryModel(categoryId: '7', productId: '18'),
+    ProductCategoryModel(categoryId: '7', productId: '21'),
+    ProductCategoryModel(categoryId: '7', productId: '67'),
+
+    // Jackets
+    ProductCategoryModel(categoryId: '8', productId: '16'),
+    ProductCategoryModel(categoryId: '8', productId: '25'),
+    ProductCategoryModel(categoryId: '8', productId: '49'),
+    ProductCategoryModel(categoryId: '8', productId: '56'),
+    ProductCategoryModel(categoryId: '8', productId: '57'),
+    ProductCategoryModel(categoryId: '8', productId: '66'),
+
+    // Shorts
+    ProductCategoryModel(categoryId: '9', productId: '9'),
+    ProductCategoryModel(categoryId: '9', productId: '11'),
+    ProductCategoryModel(categoryId: '9', productId: '68'),
+
+    // Formal Shoes
+    ProductCategoryModel(categoryId: '10', productId: '14'),
+    ProductCategoryModel(categoryId: '10', productId: '19'),
+
+    // Sports Shoes
+    ProductCategoryModel(categoryId: '11', productId: '10'),
+    ProductCategoryModel(categoryId: '11', productId: '15'),
+    ProductCategoryModel(categoryId: '11', productId: '20'),
+
+    // Face
+    ProductCategoryModel(categoryId: '12', productId: '28'),
+    ProductCategoryModel(categoryId: '12', productId: '36'),
+
+    // Hair Oils
+    ProductCategoryModel(categoryId: '13', productId: '27'),
+    ProductCategoryModel(categoryId: '13', productId: '29'),
+    ProductCategoryModel(categoryId: '13', productId: '30'),
+
+    // Bags
+    ProductCategoryModel(categoryId: '14', productId: '13'),
+    ProductCategoryModel(categoryId: '14', productId: '24'),
+    ProductCategoryModel(categoryId: '14', productId: '14'),
+    ProductCategoryModel(categoryId: '14', productId: '45'),
+    ProductCategoryModel(categoryId: '14', productId: '46'),
+    ProductCategoryModel(categoryId: '14', productId: '48'),
+
+    // Perfumes
+    ProductCategoryModel(categoryId: '15', productId: '5'),
+    ProductCategoryModel(categoryId: '15', productId: '6'),
+    ProductCategoryModel(categoryId: '15', productId: '7'),
+    ProductCategoryModel(categoryId: '15', productId: '8'),
+
+    // Watch
+    ProductCategoryModel(categoryId: '16', productId: '52'),
+    ProductCategoryModel(categoryId: '16', productId: '53'),
+
+    // Gadgets
+    ProductCategoryModel(categoryId: '17', productId: '31'),
+    ProductCategoryModel(categoryId: '17', productId: '37'),
+    ProductCategoryModel(categoryId: '17', productId: '40'),
+    ProductCategoryModel(categoryId: '17', productId: '41'),
+    ProductCategoryModel(categoryId: '17', productId: '42'),
+    ProductCategoryModel(categoryId: '17', productId: '43'),
+    ProductCategoryModel(categoryId: '17', productId: '44'),
+    ProductCategoryModel(categoryId: '17', productId: '54'),
+    ProductCategoryModel(categoryId: '17', productId: '55'),
+    ProductCategoryModel(categoryId: '17', productId: '64'),
+
+    // Laptops
+    ProductCategoryModel(categoryId: '18', productId: '22'),
+    ProductCategoryModel(categoryId: '18', productId: '23'),
+    ProductCategoryModel(categoryId: '18', productId: '38'),
+    ProductCategoryModel(categoryId: '18', productId: '39'),
+
+    // Mobiles
+    ProductCategoryModel(categoryId: '19', productId: '3'),
+    ProductCategoryModel(categoryId: '19', productId: '4'),
+    ProductCategoryModel(categoryId: '19', productId: '32'),
+    ProductCategoryModel(categoryId: '19', productId: '33'),
+    ProductCategoryModel(categoryId: '19', productId: '34'),
+    ProductCategoryModel(categoryId: '19', productId: '35'),
+
+    // Bed
+    ProductCategoryModel(categoryId: '20', productId: '50'),
+    ProductCategoryModel(categoryId: '20', productId: '51'),
+    ProductCategoryModel(categoryId: '20', productId: '58'),
+    ProductCategoryModel(categoryId: '20', productId: '59'),
+    ProductCategoryModel(categoryId: '20', productId: '60'),
+    ProductCategoryModel(categoryId: '20', productId: '63'),
+    ProductCategoryModel(categoryId: '20', productId: '65'),
+
+    // Lamp
+    ProductCategoryModel(categoryId: '21', productId: '61'),
+    ProductCategoryModel(categoryId: '21', productId: '62'),
+
+    // Cricket
+    ProductCategoryModel(categoryId: '22', productId: '26'),
+
+    // Soccer
+    ProductCategoryModel(categoryId: '23', productId: '2'),
+  ];
+
   // static final List<PromoCodeModel> promoCodes = [
   //   PromoCodeModel(
   //       id: '1',

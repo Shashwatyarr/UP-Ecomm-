@@ -3,7 +3,6 @@ import 'package:ecomm/common/widgets/appbar/appbar.dart';
 import 'package:ecomm/common/widgets/button/elevated_button.dart';
 import 'package:ecomm/features/shop/screens/cart/widgets/cart_items.dart';
 import 'package:ecomm/features/shop/screens/checkout/checkout.dart';
-import 'package:ecomm/utils/helpers/helper_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -12,7 +11,6 @@ class CartScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    bool dark = UHelperFunctions.isDarkMode(context);
     return Scaffold(
       appBar: UAppBar(
         showBackArrow: true,

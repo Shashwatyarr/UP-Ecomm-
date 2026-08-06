@@ -1,6 +1,5 @@
 import 'package:ecomm/common/styles/padding.dart';
 import 'package:ecomm/common/widgets/button/elevated_button.dart';
-import 'package:ecomm/features/authentication/screens/forget_password/reset_password.dart';
 import 'package:ecomm/utils/constants/sizes.dart';
 import 'package:ecomm/utils/constants/texts.dart';
 import 'package:flutter/material.dart';

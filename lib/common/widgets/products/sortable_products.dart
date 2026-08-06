@@ -29,7 +29,7 @@ class USortableProducts extends StatelessWidget {
             );
           })
               .toList(),
-          value: controller.selectedSortOption.value,
+          initialValue: controller.selectedSortOption.value,
           onChanged: (value)=>controller.sortProducts(value!),
           decoration: InputDecoration(prefixIcon: Icon(Iconsax.sort)),
         ),

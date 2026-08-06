@@ -3,7 +3,6 @@ import 'package:ecomm/common/widgets/appbar/appbar.dart';
 import 'package:ecomm/common/widgets/texts/section_heading.dart';
 import 'package:ecomm/features/personalization/screens/edit_profile/widgets/user_profile_with_edit_icon.dart';
 import 'package:ecomm/utils/constants/sizes.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';

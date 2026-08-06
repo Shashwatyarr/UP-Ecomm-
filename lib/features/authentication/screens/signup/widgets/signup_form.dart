@@ -1,4 +1,3 @@
-import 'package:ecomm/features/authentication/screens/signup/verify_email.dart';
 import 'package:ecomm/features/authentication/screens/signup/widgets/privacy_policy_checkbox.dart';
 import 'package:ecomm/utils/validators/validation.dart';
 import 'package:flutter/material.dart';

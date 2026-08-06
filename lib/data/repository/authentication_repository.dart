@@ -1,12 +1,6 @@
-import 'package:ecomm/data/repository/banner/banner_repository.dart';
-import 'package:ecomm/data/repository/category/category_repository.dart';
-import 'package:ecomm/data/repository/product/product_repository.dart';
-import 'package:ecomm/data/repository/user/user_repository.dart';
-import 'package:ecomm/dummy_data.dart';
 import 'package:ecomm/features/authentication/screens/login/login.dart';
 import 'package:ecomm/features/authentication/screens/onboarding/onboarding.dart';
 import 'package:ecomm/features/authentication/screens/signup/verify_email.dart';
-import 'package:ecomm/features/personalization/controllers/user_controller.dart';
 import 'package:ecomm/navigation_menu.dart';
 import 'package:ecomm/utils/exceptions/firebase_auth_exceptions.dart';
 import 'package:ecomm/utils/exceptions/platform_exceptions.dart';
@@ -19,42 +13,33 @@ import 'package:google_sign_in/google_sign_in.dart';
 
 import '../../utils/exceptions/firebase_exceptions.dart';
 import '../../utils/exceptions/format_exceptions.dart';
-import 'brands/brand_repository.dart';
 
 class AuthenticationRepository extends GetxController {
   static AuthenticationRepository get instance => Get.find();
   final localstorage = GetStorage();
   final _auth = FirebaseAuth.instance;
   User? get currentUser => _auth.currentUser;
+
   @override
   void onReady() {
     FlutterNativeSplash.remove();
     screenRedirect();
-    
-    // Attempt dummy data upload safely
-    try {
-      //Get.put(BannerRepository()).uploadBanners(UDummyData.banner);
-      //Get.put(BrandRepository()).uploadBrand(UDummyData.brands);
-      //Get.put(ProductRepository()).uploadProduct(UDummyData.products);
-    } catch (e) {
-      print('Warning: Failed to upload dummy products: $e');
-    }
   }
 
   void screenRedirect() {
     final user = _auth.currentUser;
     if (user != null) {
       if (user.emailVerified) {
-        Get.offAll(() => NavigationMenu());
+        Get.offAll(() => const NavigationMenu());
       } else {
         Get.offAll(() => VerifyEmailScreen(email: user.email));
       }
     } else {
       bool isFirstTime = localstorage.read('isFirstTime') ?? true;
       if (isFirstTime) {
-        Get.offAll(() => OnboardingScreen());
+        Get.offAll(() => const OnboardingScreen());
       } else {
-        Get.offAll(() => LoginScreen());
+        Get.offAll(() => const LoginScreen());
       }
     }
   }
@@ -68,7 +53,7 @@ class AuthenticationRepository extends GetxController {
       throw UFirebaseAuthException(e.code).message;
     } on FirebaseException catch (e) {
       throw UFirebaseException(e.code).message;
-    } on FormatException catch (e) {
+    } on FormatException catch (_) {
       throw UFormatException();
     } on PlatformException catch (e) {
       throw UPlatformException(e.code).message;
@@ -88,7 +73,7 @@ class AuthenticationRepository extends GetxController {
       throw UFirebaseAuthException(e.code).message;
     } on FirebaseException catch (e) {
       throw UFirebaseException(e.code).message;
-    } on FormatException catch (e) {
+    } on FormatException catch (_) {
       throw UFormatException();
     } on PlatformException catch (e) {
       throw UPlatformException(e.code).message;
@@ -99,7 +84,7 @@ class AuthenticationRepository extends GetxController {
 
   Future<UserCredential> signInWithGoogle() async {
     try {
-      GoogleSignIn googleSignIn=GoogleSignIn.instance;
+      GoogleSignIn googleSignIn = GoogleSignIn.instance;
       await googleSignIn.initialize();
       GoogleSignInAccount account = await googleSignIn.authenticate();
 
@@ -112,7 +97,7 @@ class AuthenticationRepository extends GetxController {
       throw UFirebaseAuthException(e.code).message;
     } on FirebaseException catch (e) {
       throw UFirebaseException(e.code).message;
-    } on FormatException catch (e) {
+    } on FormatException catch (_) {
       throw UFormatException();
     } on PlatformException catch (e) {
       throw UPlatformException(e.code).message;
@@ -128,7 +113,7 @@ class AuthenticationRepository extends GetxController {
       throw UFirebaseAuthException(e.code).message;
     } on FirebaseException catch (e) {
       throw UFirebaseException(e.code).message;
-    } on FormatException catch (e) {
+    } on FormatException catch (_) {
       throw UFormatException();
     } on PlatformException catch (e) {
       throw UPlatformException(e.code).message;
@@ -144,7 +129,7 @@ class AuthenticationRepository extends GetxController {
       throw UFirebaseAuthException(e.code).message;
     } on FirebaseException catch (e) {
       throw UFirebaseException(e.code).message;
-    } on FormatException catch (e) {
+    } on FormatException catch (_) {
       throw UFormatException();
     } on PlatformException catch (e) {
       throw UPlatformException(e.code).message;
@@ -152,15 +137,16 @@ class AuthenticationRepository extends GetxController {
       throw 'Something went wrong. Please try again later';
     }
   }
+
   Future<void> reAuthenticateEmailAndPasswordUser(String email, String password) async {
     try {
-      AuthCredential credential=EmailAuthProvider.credential(email: email, password: password);
+      AuthCredential credential = EmailAuthProvider.credential(email: email, password: password);
       await _auth.currentUser!.reauthenticateWithCredential(credential);
     } on FirebaseAuthException catch (e) {
       throw UFirebaseAuthException(e.code).message;
     } on FirebaseException catch (e) {
       throw UFirebaseException(e.code).message;
-    } on FormatException catch (e) {
+    } on FormatException catch (_) {
       throw UFormatException();
     } on PlatformException catch (e) {
       throw UPlatformException(e.code).message;
@@ -168,16 +154,17 @@ class AuthenticationRepository extends GetxController {
       throw 'Something went wrong. Please try again later';
     }
   }
+
   Future<void> logout() async {
     try {
       await FirebaseAuth.instance.signOut();
       await GoogleSignIn.instance.signOut();
-      Get.offAll(() => LoginScreen());
+      Get.offAll(() => const LoginScreen());
     } on FirebaseAuthException catch (e) {
       throw UFirebaseAuthException(e.code).message;
     } on FirebaseException catch (e) {
       throw UFirebaseException(e.code).message;
-    } on FormatException catch (e) {
+    } on FormatException catch (_) {
       throw UFormatException();
     } on PlatformException catch (e) {
       throw UPlatformException(e.code).message;
@@ -186,20 +173,15 @@ class AuthenticationRepository extends GetxController {
     }
   }
 
-
   Future<void> deleteAccount() async {
-    try{
-      await UserRepository.instance.removeUserRecord(currentUser!.uid);
-
-      if(UserController.instance.user.value.publicId.isNotEmpty){
-        UserRepository.instance.deleteUserProfilePicture(UserController.instance.user.value.publicId);
-      }
+    try {
+      // Logic for deleting account can be added here
       await _auth.currentUser!.delete();
-    }on FirebaseAuthException catch (e) {
+    } on FirebaseAuthException catch (e) {
       throw UFirebaseAuthException(e.code).message;
     } on FirebaseException catch (e) {
       throw UFirebaseException(e.code).message;
-    } on FormatException catch (e) {
+    } on FormatException catch (_) {
       throw UFormatException();
     } on PlatformException catch (e) {
       throw UPlatformException(e.code).message;
