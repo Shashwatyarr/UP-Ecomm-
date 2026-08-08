@@ -26,11 +26,13 @@ class AuthenticationRepository extends GetxController {
     screenRedirect();
   }
 
-  void screenRedirect() {
+  Future<void> screenRedirect() async {
     final user = _auth.currentUser;
     if (user != null) {
       if (user.emailVerified) {
         Get.offAll(() => const NavigationMenu());
+
+        await GetStorage.init(user.uid);
       } else {
         Get.offAll(() => VerifyEmailScreen(email: user.email));
       }

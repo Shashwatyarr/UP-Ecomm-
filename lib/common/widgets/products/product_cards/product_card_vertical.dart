@@ -1,6 +1,7 @@
 import 'package:ecomm/common/custom_shapes/rounded_container.dart';
 import 'package:ecomm/common/widgets/icon/circular_icon.dart';
 import 'package:ecomm/common/widgets/images/rounded_image.dart';
+import 'package:ecomm/common/widgets/products/favourite_icon.dart';
 import 'package:ecomm/features/shop/models/product_model.dart';
 import 'package:ecomm/features/shop/screens/product_details/product_details.dart';
 import 'package:ecomm/utils/constants/colors.dart';
@@ -69,8 +70,7 @@ class UProductCardVertical extends StatelessWidget {
                   Positioned(
                       right: 0,
                       top: 0,
-                      child: UCircularIcon(
-                        icon: Iconsax.heart5, color: Colors.red,)
+                      child: UFavouriteIcon(productId: product.id,),
                   ),
                 ],
               ),

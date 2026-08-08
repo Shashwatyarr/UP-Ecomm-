@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:ecomm/common/widgets/products/favourite_icon.dart';
 import 'package:ecomm/features/shop/models/product_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -81,7 +82,7 @@ class UProductThumbnailAndSlider extends StatelessWidget {
           ),
           UAppBar(
             showBackArrow: true,
-            actions: [UCircularIcon(icon: Iconsax.heart5, color: Colors.red)],
+            actions: [UFavouriteIcon(productId: product.id,)],
           ),
         ],
       ),
